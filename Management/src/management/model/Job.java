@@ -8,6 +8,13 @@ public class Job extends Duty {
 
 	private String nameJob;
 	
+	public Job(String nameJob, String at, LocalDate startDate, LocalDate endDate) {
+		this.nameJob = nameJob;
+		super.at = at;
+		super.startDate = startDate;
+		super.endDate = endDate;
+	}	
+	
 	public Job(JsonObject jsonObject) {
 		this.nameJob = jsonObject.getString("NameJob");
 		super.at = jsonObject.getString("At");
@@ -32,5 +39,17 @@ public class Job extends Duty {
 		s += "Job Study: "+nameJob+"\n";
 		s += super.toString();
 		return s;
+	}
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
 	}
 }

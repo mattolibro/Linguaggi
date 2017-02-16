@@ -1,8 +1,6 @@
 package management.model;
 import java.time.LocalDate;
 
-import javax.json.*;
-
 public class Person {
 	
 	private String ID;
@@ -73,12 +71,27 @@ public class Person {
 	@Override
 	public String toString() {
 		String s = "";
-		s += "ID :"+ID+"\n";
-		s += "First Name :"+firstName+"\n";
-		s += "Last Name :"+lastName+"\n";
-		s += "Date of birth :"+dateOfBirth.getDayOfMonth()+"/"+dateOfBirth.getMonthValue()+"/"+dateOfBirth.getYear()+"\n";
+		s += "ID: "+ID+"\n";
+		s += "First Name: "+firstName+"\n";
+		s += "Last Name: "+lastName+"\n";
+		s += "Date of birth: "+dateOfBirth.getDayOfMonth()+"/"+dateOfBirth.getMonthValue()+"/"+dateOfBirth.getYear()+"\n";
 		s += address.toString();
 		s += cv.toString();
+		s +="\n\n";
 		return s;
+	}
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean result = false;
+		if (this.toString().compareTo(((Person)obj).toString()) == 0)
+				result = true;
+		return result;
 	}
 }

@@ -1,18 +1,18 @@
 package management.model;
 
-import javax.json.JsonObject;
-
 public class Address {
 	private String street;
 	private String city;
 	private String postalCode;
 	private String country;
 	
-	public Address(JsonObject jsonObject) {
-		this.street = jsonObject.getString("Street");
-		this.city = jsonObject.getString("City");
-		this.postalCode = jsonObject.getString("PostalCode");
-		this.country = jsonObject.getString("Country");
+    
+	
+	public Address(String street, String city, String postalCode, String country) {
+		this.street = street;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.country = country;
 	}
 
 	public String getStreet() {
@@ -55,6 +55,18 @@ public class Address {
 		s += "Postal Code: "+postalCode+"\n";
 		s += "Country: "+country+"\n";
 		return s;
+	}
+	
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
 	}
 	
 }
