@@ -19,7 +19,6 @@ public class TestJSON {
 				JsonObject obj =  rdr.readObject();
 				JsonArray results = obj.getJsonArray("People");
 				for (JsonObject result : results.getValuesAs(JsonObject.class)) {
-					System.out.println("ciclo entrato");
 					System.out.println(result.getJsonObject("Person").getString("ID"));
 				}
 			}
