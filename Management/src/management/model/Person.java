@@ -12,15 +12,16 @@ public class Person {
 	private Address address;
 	private CV cv;
 	
-	public Person(JsonObject jsonObject) {
-		this.ID = jsonObject.getString("ID");
-		this.firstName = jsonObject.getString("FirstName");
-		this.lastName = jsonObject.getString("LastName");
-		this.dateOfBirth = LocalDate.parse(jsonObject.getString("DateOfBirth"));
-		this.address = new Address(jsonObject.getJsonObject("Address"));
-		this.cv = new CV(jsonObject.getJsonObject("CV"));
-	}
 	
+	public Person(String iD, String firstName, String lastName, LocalDate dateOfBirth, Address address, CV cv) {
+		ID = iD;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.cv = cv;
+	}
+
 	public String getID() {
 		return ID;
 	}
