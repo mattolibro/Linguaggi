@@ -9,14 +9,14 @@
         "Address": {
           "Street": "via della vittoria, 21",
           "City": "Bologna",
-          "CAP": "40100",
+          "PostalCode": "40100",
           "Country": "Monopoli"
         },
         "CV": {
           "Studies": [
             {
               "Study": {
-                "NameSutdy": "Computer Science",
+                "NameStudy": "Computer Science",
                 "At": "Università Bologna",
                 "StartDate": "2011-09-11",
                 "EndDate": "2014-06-18"
@@ -30,23 +30,23 @@
                 "EndDate": "2017-06-18"
               }
             }
-          ]
-        },
-        "LanguagesKnown": [
-          "Italian",
-          "English"
-        ],
-        "Jobs": [
-          {
-            "Job": {
-              "NameJob": "Programmer",
-              "At": "Ubisoft",
-              "StartDate": "2017-07-20",
-              "EndDate": ""
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Programmer",
+                "At": "Ubisoft",
+                "StartDate": "2017-07-20",
+                "EndDate": ""
+              }
             }
-          }
-        ]
+          ]
+        }
       }
     }
   ]
-}  
+}

@@ -24,7 +24,8 @@ public class TestJSON {
 			for (JsonObject result : results.getValuesAs(JsonObject.class)) {
 				//System.out.println(result.getJsonObject("Person").getString("ID"));
 				Person p = new Person(result.getJsonObject("Person"));
-				System.out.println(p.getID());
+				System.out.println(p.toString());
+				
 			}
 		}
 		catch (IOException e) {

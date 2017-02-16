@@ -4,32 +4,33 @@ import java.time.LocalDate;
 
 import javax.json.JsonObject;
 
-public class Job extends Duty {
+public class Study extends Duty {
 
-	private String nameJob;
-	
-	public Job(JsonObject jsonObject) {
-		this.nameJob = jsonObject.getString("NameJob");
+	private String nameStudy;
+
+	public Study(JsonObject jsonObject) {
+		this.nameStudy = jsonObject.getString("NameStudy");
 		super.at = jsonObject.getString("At");
 		super.startDate = LocalDate.parse(jsonObject.getString("StartDate"));
 		if(!jsonObject.getString("EndDate").isEmpty())
 			super.endDate = LocalDate.parse(jsonObject.getString("EndDate"));
 		else
 			super.endDate = null;
+
+	}	
+
+	public String getNameStudy() {
+		return nameStudy;
 	}
-	
-	public String getJobStudy() {
-		return nameJob;
+
+	public void setNameStudy(String nameStudy) {
+		this.nameStudy = nameStudy;
 	}
-	
-	public void setJobStudy(String nameJob) {
-		this.nameJob = nameJob;
-	}
-	
+
 	@Override
 	public String toString() {
 		String s = "";
-		s += "Job Study: "+nameJob+"\n";
+		s += "Name Study: "+nameStudy+"\n";
 		s += super.toString();
 		return s;
 	}
