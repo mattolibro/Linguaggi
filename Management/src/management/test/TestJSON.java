@@ -13,20 +13,17 @@ public class TestJSON {
 	public void testJSONFormat() {
 		File file = new File("files/grammar.txt");
 		InputStream fis = null;
+		
 		try {
 			fis = new FileInputStream(file);
-			try(JsonReader rdr = Json.createReader(fis)) {
-				JsonObject obj =  rdr.readObject();
-				JsonArray results = obj.getJsonArray("People");
-				for (JsonObject result : results.getValuesAs(JsonObject.class)) {
-					System.out.println(result.getJsonObject("Person").getString("ID"));
-				}
+			
+			JsonReader rdr = Json.createReader(fis);
+			JsonObject obj =  rdr.readObject();
+			JsonArray results = obj.getJsonArray("People");
+			
+			for (JsonObject result : results.getValuesAs(JsonObject.class)) {
+				System.out.println(result.getJsonObject("Person").getString("ID"));
 			}
-			catch (Exception e) {
-				System.out.println("Fuck JSON!");
-			}
-
-
 		}
 		catch (IOException e) {
 			e.printStackTrace();

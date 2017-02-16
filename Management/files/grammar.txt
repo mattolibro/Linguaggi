@@ -1,39 +1,16 @@
 {
 	"People": [
 		"Person": {
-			"ID": "ID-000001"
+			"ID": "ID-000001",
 			"FirstName": "Pippo",
-			"LastName": "Baudo"
+			"LastName": "Baudo",
 			"Address": {
 				"Street": "via della vittoria, 21",
-				"City": "Bologna"
-				"CAP": "40100"
-				"DateOfBirth": "31/07/1989"
+				"City": "Bologna",
+				"CAP": "40100",
+				"DateOfBirth": "31/07/1989",
 				"Country": "Monopoli"
 			}
-		}
-		"CV": {
-			"Studies": ["Study": {
-							"NameSutdy": "Computer Science",
-							"At": "Università Bologna",
-							"StartDate": "11/09/2011",
-							"EndDate": "18/06/2014"
-						}, 
-						"Study": {
-							"NameSutdy": "Master Software Architecture",
-							"At": "Università Bologna",
-							"StartDate": "11/09/2014",
-							"EndDate": "18/06/2017"
-						}
-			]
-			"LanguagesKnown" : ["Italian", "English"]
-			"Jobs": ["Job": {
-						"NameJob": "Programmer",
-						"At": "Ubisoft",
-						"StartDate" : "20/07/2017"
-						"EndDate": "-"
-					}
-			]
 		}
 	]	
 }
