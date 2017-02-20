@@ -49,7 +49,12 @@ public class Job extends Duty {
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		boolean result = false;
+		Job s = (Job) obj;
+		
+		if(nameJob.equals(s.nameJob) && super.equals(obj))
+			result = true;
+		
+		return result;
 	}
 }

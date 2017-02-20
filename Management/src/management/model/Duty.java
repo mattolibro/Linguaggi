@@ -54,7 +54,12 @@ public abstract class Duty {
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		boolean result = false;
+		Duty d = (Duty) obj;
+		
+		if(at.equals(d) && startDate.isEqual(d.startDate) && endDate.isEqual(d.endDate))
+			result = true;
+		
+		return result;
 	}
 }

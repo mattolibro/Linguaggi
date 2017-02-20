@@ -65,8 +65,12 @@ public class Address {
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		boolean result = false;
+		Address a = (Address) obj;
+		
+		if(street.equals(a.street) && city.equals(a.city) && postalCode.equals(a.postalCode) && country.equals(a.country))
+			result = true;
+		return result;
 	}
 	
 }

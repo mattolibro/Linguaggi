@@ -1,6 +1,8 @@
 package management.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CV {
 	private List<Study> studies;
@@ -55,6 +57,27 @@ public class CV {
 		return s;
 	}
 	
+	private static boolean listStudyEqualsNoOrder(List<Study> l1, List<Study> l2) {
+	    final Set<Study> s1 = new HashSet<>(l1);
+	    final Set<Study> s2 = new HashSet<>(l2);
+
+	    return s1.equals(s2);
+	}
+	
+	private static boolean listLanguageEqualsNoOrder(List<String> l1, List<String> l2) {
+	    final Set<String> s1 = new HashSet<>(l1);
+	    final Set<String> s2 = new HashSet<>(l2);
+
+	    return s1.equals(s2);
+	}
+	
+	private static boolean listJobEqualsNoOrder(List<Job> l1, List<Job> l2) {
+	    final Set<Job> s1 = new HashSet<>(l1);
+	    final Set<Job> s2 = new HashSet<>(l2);
+
+	    return s1.equals(s2);
+	}
+	
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
@@ -63,8 +86,14 @@ public class CV {
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+		boolean result = false;
+		
+		CV cv = (CV) obj;
+		if(listStudyEqualsNoOrder(studies, cv.studies) && listLanguageEqualsNoOrder(languagesKnown, cv.languagesKnown) && 
+				listJobEqualsNoOrder(jobs, cv.jobs))
+			result = true;
+		
+		return result;
 	}
 
 }

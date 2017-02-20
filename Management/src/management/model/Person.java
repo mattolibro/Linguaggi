@@ -90,8 +90,11 @@ public class Person {
 	@Override
 	public boolean equals(Object obj) {
 		boolean result = false;
-		if (this.toString().compareTo(((Person)obj).toString()) == 0)
-				result = true;
+		Person p = (Person) obj;
+		
+		if(ID.equals(p.ID) && firstName.equals(p.firstName) && lastName.equals(p.lastName) && dateOfBirth.isEqual(p.dateOfBirth) && 
+				address.equals(p.address))
+			result = true;
 		return result;
 	}
 }
