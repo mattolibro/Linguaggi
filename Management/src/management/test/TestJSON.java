@@ -31,27 +31,27 @@ public class TestJSON {
 			fis = new FileInputStream(file);
 			JsonReader rdr = Json.createReader(fis);
 			JsonObject obj =  rdr.readObject();
+			List<Person> person = new ArrayList<Person>();
 			JsonArray results = obj.getJsonArray("People");
 			for (JsonObject result : results.getValuesAs(JsonObject.class)) {
 				//System.out.println(result.getJsonObject("Person").getString("ID"));
 				PeopleJsonFactory people = new PeopleJsonFactory(result.getJsonObject("Person"));
-				Person person = people.createPerson();
+				person.add(people.createPerson());
 				System.out.println(person.toString());
-				
-				
-				List<Study> studies = new ArrayList<Study>();
-				studies.add(new Study("Computer Science", "Universita Bologna", LocalDate.parse("2011-09-11"), LocalDate.parse("2014-06-18")));
-				studies.add(new Study("Master Software Architecture", "Universita Bologna", LocalDate.parse("2014-09-11"), LocalDate.parse("2017-06-18")));
-				List<String> languagesKnown = new ArrayList<String>();
-				languagesKnown.add("Italian");
-				languagesKnown.add("English");
-				List<Job> jobs = new ArrayList<Job>();
-				jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
-				Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
-				System.out.println(personExpected.toString());
-				
-				assertEquals(personExpected, person);
 			}
+			
+			List<Study> studies = new ArrayList<Study>();
+			studies.add(new Study("Computer Science", "Universita Bologna", LocalDate.parse("2011-09-11"), LocalDate.parse("2014-06-18")));
+			studies.add(new Study("Master Software Architecture", "Universita Bologna", LocalDate.parse("2014-09-11"), LocalDate.parse("2017-06-18")));
+			List<String> languagesKnown = new ArrayList<String>();
+			languagesKnown.add("Italian");
+			languagesKnown.add("English");
+			List<Job> jobs = new ArrayList<Job>();
+			jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
+			Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
+			System.out.println(personExpected.toString());
+			
+			assertEquals(personExpected, person.get(0));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
