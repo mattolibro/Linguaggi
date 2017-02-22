@@ -24,6 +24,10 @@ public abstract class Duty {
 	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
+	
+	public void setStartDate(String startDate) {
+		this.startDate = LocalDate.parse(startDate);
+	}
 
 	public LocalDate getEndDate() {
 		return endDate;
@@ -31,6 +35,10 @@ public abstract class Duty {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+	
+	public void setEndDate(String endDate) {
+		this.endDate = LocalDate.parse(endDate);
 	}
 	
 	@Override

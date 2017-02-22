@@ -6,7 +6,9 @@ public class Address {
 	private String postalCode;
 	private String country;
 	
-    
+    public Address() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Address(String street, String city, String postalCode, String country) {
 		this.street = street;

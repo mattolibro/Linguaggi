@@ -10,6 +10,9 @@ public class Person {
 	private Address address;
 	private CV cv;
 	
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Person(String iD, String firstName, String lastName, LocalDate dateOfBirth, Address address, CV cv) {
 		ID = iD;
@@ -50,6 +53,10 @@ public class Person {
 
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = LocalDate.parse(dateOfBirth);
 	}
 
 	public Address getAddress() {

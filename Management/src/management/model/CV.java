@@ -1,5 +1,6 @@
 package management.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,10 @@ public class CV {
 		this.studies = studies;
 		this.languagesKnown = languagesKnown;
 		this.jobs = jobs;
+	}
+	
+	public CV() {
+		this(new ArrayList<Study>(), new ArrayList<String>(), new ArrayList<Job>());
 	}
 
 	public List<Study> getStudies() {
@@ -37,6 +42,18 @@ public class CV {
 
 	public void setJobs(List<Job> jobs) {
 		this.jobs = jobs;
+	}
+	
+	public void AddStudy(Study s) {
+		studies.add(s);
+	}
+	
+	public void AddLanguage(String l) {
+		languagesKnown.add(l);
+	}
+	
+	public void AddJob(Job j) {
+		jobs.add(j);
 	}
 	
 	@Override

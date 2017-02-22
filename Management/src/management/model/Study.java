@@ -14,6 +14,10 @@ public class Study extends Duty {
 		super.startDate = startDate;
 		super.endDate = endDate;
 	}
+	
+	public Study() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Study(JsonObject jsonObject) {
 		this.nameStudy = jsonObject.getString("NameStudy");

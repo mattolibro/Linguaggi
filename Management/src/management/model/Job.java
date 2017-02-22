@@ -13,7 +13,11 @@ public class Job extends Duty {
 		super.at = at;
 		super.startDate = startDate;
 		super.endDate = endDate;
-	}	
+	}
+
+	public Job() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Job(JsonObject jsonObject) {
 		this.nameJob = jsonObject.getString("NameJob");
