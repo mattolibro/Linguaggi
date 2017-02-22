@@ -3,23 +3,36 @@ package management.view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import javax.swing.JButton;
-import java.awt.GridBagConstraints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import management.model.Address;
+import management.model.CV;
+import management.model.Job;
 import management.model.Person;
+import management.model.Study;
+
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
 
 public class ManagementWindowApp {
 
 	private List<Person> people;
-	
+
 	private JFrame frame;
 	private ManagementWindowApp mwa = this;
-
+	
+	private JTextArea textArea;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -47,20 +60,14 @@ public class ManagementWindowApp {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		people = new ArrayList<Person>();
-		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setTitle("Management App");
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JButton btnAddPerson = new JButton("Add Person");
 		btnAddPerson.addMouseListener(new MouseAdapter() {
@@ -70,15 +77,56 @@ public class ManagementWindowApp {
 				addPersonWindow.setVisible(true);
 			}
 		});
-		GridBagConstraints gbc_btnAddPerson = new GridBagConstraints();
-		gbc_btnAddPerson.gridx = 5;
-		gbc_btnAddPerson.gridy = 4;
-		frame.getContentPane().add(btnAddPerson, gbc_btnAddPerson);
 		
-	}
-	
-	public void addPerson(Person person) {
-		people.add(person);
+		textArea = new JTextArea();
+		JScrollPane scrollPane = new JScrollPane (textArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		JLabel lblPeople = new JLabel("People");
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(20)
+					.addComponent(btnAddPerson)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblPeople)
+							.addContainerGap())
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(65)
+					.addComponent(btnAddPerson)
+					.addContainerGap(183, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(lblPeople)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+		);
+		frame.getContentPane().setLayout(groupLayout);
+		
+		/*---Sample person--------*/
+		List<Study> studies = new ArrayList<Study>();
+		studies.add(new Study("Computer Science", "Universita Bologna", LocalDate.parse("2011-09-11"), LocalDate.parse("2014-06-18")));
+		studies.add(new Study("Master Software Architecture", "Universita Bologna", LocalDate.parse("2014-09-11"), LocalDate.parse("2017-06-18")));
+		List<String> languagesKnown = new ArrayList<String>();
+		languagesKnown.add("Italian");
+		languagesKnown.add("English");
+		List<Job> jobs = new ArrayList<Job>();
+		jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
+		Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
+		
+		people.add(personExpected);
+		
+		textArea.setText("Person "+ people.size()+":\n\n"+personExpected.toString());
+		/*------------------------------------------------*/
 	}
 
+	public void addPerson(Person person) {
+		people.add(person);
+		textArea.setText(textArea.getText()+"Person "+ people.size()+":\n\n"+person.toString());
+	}
 }

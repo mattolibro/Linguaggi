@@ -71,7 +71,7 @@ public class AddPersonWindow extends JFrame {
 		
 		cvLabel = new JLabel("CV: ");
 		contentPane.add(cvLabel, BorderLayout.NORTH);
-		cvLabel.setVisible(true);
+		cvLabel.setVisible(false);
 		
 		//Panel changes after every click on DONE
 		{
@@ -79,7 +79,7 @@ public class AddPersonWindow extends JFrame {
 			contentPane.add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BorderLayout(0, 0));
 
-			lblId = new JLabel("[Job] Date of Start");
+			lblId = new JLabel("ID");
 			panel.add(lblId, BorderLayout.NORTH);
 
 			textField = new JTextField();
@@ -165,7 +165,6 @@ public class AddPersonWindow extends JFrame {
 			address.setCountry(textField.getText());
 			textField.setText("");
 			person.setAddress(address);
-			address = new Address(); // address refreshed, because it's completed and it can be used for another person
 			cvLabel.setVisible(true);
 			lblId.setText("[Study] Name Study");
 			break;
@@ -221,7 +220,7 @@ public class AddPersonWindow extends JFrame {
 			break;
 		
 		case "[Job] Date of Start":
-			study.setStartDate((textField.getText()));
+			job.setStartDate((textField.getText()));
 			textField.setText("");
 			textField.setToolTipText("yyyy-mm-dd");
 			lblId.setText("[Job] Date of End");
@@ -260,6 +259,7 @@ public class AddPersonWindow extends JFrame {
 	}
 	
 	public void savePerson() {
+		person.setCv(cv); // here sets the curriculum vitae of person before saving person
 		mwa.addPerson(person);
 		frame.setEnabled(true);
 		this.dispose();
