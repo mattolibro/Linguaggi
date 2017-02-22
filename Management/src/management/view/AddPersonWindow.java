@@ -36,14 +36,22 @@ public class AddPersonWindow extends JFrame {
 	private JLabel lblId;
 	private JTextField textField;
 	private JLabel cvLabel;
-	private JButton btnNewButton;
-	StudyMouseAdapter studyMouseAdapter;
+	private JButton doneButton;
 	
-
+	private StudyMouseAdapter studyMouseAdapter;
+	private LanguageMouseAdapter languageMouseAdapter;
+	private JobMouseAdapter jobMouseAdapter;
+	
+	private ManagementWindowApp mwa;
+	private JFrame frame;
 	/**
 	 * Create the frame.
 	 */
-	public AddPersonWindow(JFrame frame) {
+	public AddPersonWindow(JFrame frame, ManagementWindowApp mwa) {
+		
+		this.mwa = mwa;
+		this.frame = frame;
+		
 		frame.setEnabled(false);
 
 		person = new Person();
@@ -71,18 +79,18 @@ public class AddPersonWindow extends JFrame {
 			contentPane.add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BorderLayout(0, 0));
 
-			lblId = new JLabel("[Study] Date of Start");
+			lblId = new JLabel("[Job] Date of Start");
 			panel.add(lblId, BorderLayout.NORTH);
 
 			textField = new JTextField();
 			panel.add(textField, BorderLayout.CENTER);
 			textField.setColumns(10);
 
-			btnNewButton = new JButton("DONE");
+			doneButton = new JButton("DONE");
 	
 			PersonMouseAdapter personMouseAdapter = new PersonMouseAdapter(this);
-			btnNewButton.addMouseListener(personMouseAdapter);
-			panel.add(btnNewButton, BorderLayout.SOUTH);
+			doneButton.addMouseListener(personMouseAdapter);
+			panel.add(doneButton, BorderLayout.SOUTH);
 			
 		}
 		
@@ -92,9 +100,16 @@ public class AddPersonWindow extends JFrame {
 		lblId.setText(text);
 	}
 	
+	void removeLanguageMouseAdapter() {
+		doneButton.removeMouseListener(languageMouseAdapter);
+	}
+	
+	void addLanguageMouseAdapter(LanguageMouseAdapter languageMouseAdapter) {
+		this.languageMouseAdapter = languageMouseAdapter;
+		doneButton.addMouseListener(this.languageMouseAdapter);
+	}
+	
 	public void changePanel() {
-		
-		System.out.println("label is "+lblId.getText());
 		
 		switch(lblId.getText()) {
 		
@@ -156,7 +171,6 @@ public class AddPersonWindow extends JFrame {
 			break;
 			
 		case "[Study] Name Study":
-			System.out.println("It works");
 			study.setNameStudy((textField.getText()));
 			textField.setText("");
 			lblId.setText("[Study] At");
@@ -174,8 +188,9 @@ public class AddPersonWindow extends JFrame {
 			textField.setText("");
 			textField.setToolTipText("yyyy-mm-dd");
 			lblId.setText("[Study] Date of End");
-			studyMouseAdapter = new StudyMouseAdapter(this);
-			btnNewButton.addMouseListener(studyMouseAdapter);
+			
+			studyMouseAdapter = new StudyMouseAdapter(this); // mouseAdapter created for knowing if adding another study
+			doneButton.addMouseListener(studyMouseAdapter);
 			break;
 		
 		case "[Study] Date of End":
@@ -185,13 +200,69 @@ public class AddPersonWindow extends JFrame {
 			textField.setText("");
 			textField.setToolTipText(null);
 			break;
+			
+		case "Language":
+			cv.AddLanguage(textField.getText());
+			textField.setText("");
+			break;
+			
+		case "[Job] Name Job":
+			cvLabel.setVisible(true);
+			job.setNameJob(textField.getText());
+			textField.setText("");
+			lblId.setText("[Job] At");
+			break;
+			
+		case "[Job] At":
+			job.setAt((textField.getText()));
+			textField.setText("");
+			textField.setToolTipText("yyyy-mm-dd");
+			lblId.setText("[Job] Date of Start");
+			break;
+		
+		case "[Job] Date of Start":
+			study.setStartDate((textField.getText()));
+			textField.setText("");
+			textField.setToolTipText("yyyy-mm-dd");
+			lblId.setText("[Job] Date of End");
+			
+			jobMouseAdapter = new JobMouseAdapter(this);	// mouseAdapter created for knowing if adding another job
+			doneButton.addMouseListener(jobMouseAdapter);
+			break;
+		
+		case "[Job] Date of End":
+			job.setEndDate((textField.getText()));
+			cv.AddJob(job);
+			job = new Job(); // job refreshed, because it's completed and it can be used again also for the same CV
+			textField.setText("");
+			textField.setToolTipText(null);
+			cvLabel.setVisible(false);
+			break;
+		
 		}
 	}
 	
 	public void addAnotherStudy() {
-		btnNewButton.removeMouseListener(studyMouseAdapter);
+		doneButton.removeMouseListener(studyMouseAdapter);
 		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Study");
 		continueToInsertDialog.setVisible(true);
+	}
+	
+	public void addAnotherLanguage() {
+		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Language");
+		continueToInsertDialog.setVisible(true);
+	}
+	
+	public void addAnotherJob() {
+		doneButton.removeMouseListener(jobMouseAdapter);
+		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Job");
+		continueToInsertDialog.setVisible(true);
+	}
+	
+	public void savePerson() {
+		mwa.addPerson(person);
+		frame.setEnabled(true);
+		this.dispose();
 	}
 	
 }

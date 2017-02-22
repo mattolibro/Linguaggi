@@ -29,11 +29,11 @@ public class Job extends Duty {
 			super.endDate = null;
 	}
 	
-	public String getJobStudy() {
+	public String getNameJob() {
 		return nameJob;
 	}
 	
-	public void setJobStudy(String nameJob) {
+	public void setNameJob(String nameJob) {
 		this.nameJob = nameJob;
 	}
 	

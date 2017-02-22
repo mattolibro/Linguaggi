@@ -8,10 +8,17 @@ import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import management.model.Person;
 
 public class ManagementWindowApp {
 
+	private List<Person> people;
+	
 	private JFrame frame;
+	private ManagementWindowApp mwa = this;
 
 	/**
 	 * Launch the application.
@@ -40,6 +47,9 @@ public class ManagementWindowApp {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		people = new ArrayList<Person>();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setTitle("Management App");
@@ -56,7 +66,7 @@ public class ManagementWindowApp {
 		btnAddPerson.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {				
-				AddPersonWindow addPersonWindow = new AddPersonWindow(frame);
+				AddPersonWindow addPersonWindow = new AddPersonWindow(frame, mwa);
 				addPersonWindow.setVisible(true);
 			}
 		});
@@ -65,6 +75,10 @@ public class ManagementWindowApp {
 		gbc_btnAddPerson.gridy = 4;
 		frame.getContentPane().add(btnAddPerson, gbc_btnAddPerson);
 		
+	}
+	
+	public void addPerson(Person person) {
+		people.add(person);
 	}
 
 }

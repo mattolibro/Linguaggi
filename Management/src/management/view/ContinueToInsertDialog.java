@@ -45,7 +45,9 @@ public class ContinueToInsertDialog extends JDialog {
 		yesButton.addMouseListener(continueMouseAdapter);
 		buttonPane.add(yesButton);
 
+		NoContinueMouseAdapter noContinueMouseAdapter = new NoContinueMouseAdapter(this, addPersonWindow, option);
 		JButton noButton = new JButton("NO");
+		noButton.addMouseListener(noContinueMouseAdapter);
 		buttonPane.add(noButton);
 	}
 
