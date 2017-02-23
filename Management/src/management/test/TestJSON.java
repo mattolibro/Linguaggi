@@ -25,7 +25,7 @@ public class TestJSON {
 
 	@Test
 	public void testJSONFormat() {
-		File file = new File("files/grammarSample.txt");
+		File file = new File("files/grammarSample.json");
 		InputStream fis = null;
 		try {
 			fis = new FileInputStream(file);
@@ -37,7 +37,7 @@ public class TestJSON {
 				//System.out.println(result.getJsonObject("Person").getString("ID"));
 				PeopleJsonFactory people = new PeopleJsonFactory(result.getJsonObject("Person"));
 				person.add(people.createPerson());
-				System.out.println(person.toString());
+				//System.out.println(person.toString());
 			}
 			
 			List<Study> studies = new ArrayList<Study>();
@@ -49,7 +49,8 @@ public class TestJSON {
 			List<Job> jobs = new ArrayList<Job>();
 			jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
 			Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
-			System.out.println(personExpected.toString());
+			//System.out.println(personExpected.toString());
+			System.out.println(personExpected.toStringJSON());
 			
 			assertEquals(personExpected, person.get(0));
 		}

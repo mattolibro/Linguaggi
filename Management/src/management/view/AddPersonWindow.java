@@ -118,6 +118,7 @@ public class AddPersonWindow extends JFrame {
 			);
 			panel_1.setLayout(gl_panel_1);
 			
+			//Icon for using the speech recognition
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 			img_label.setIcon(imageIcon);
 		}

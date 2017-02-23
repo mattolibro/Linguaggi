@@ -45,6 +45,13 @@ public class Study extends Duty {
 		return s;
 	}
 	
+	public String toStringJSON() {
+		String s = "{\n\"Study\": {\n";
+		s += "\"NameStudy\": \""+nameStudy+"\",\n";
+		s += super.toStringJSON();
+		return s;
+	}
+	
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub

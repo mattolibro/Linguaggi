@@ -59,6 +59,16 @@ public class Address {
 		return s;
 	}
 	
+	public String toStringJSON() {
+		String s = "\"Address\": {\n";
+		s += "\"Street\": \""+street+"\",\n";
+		s += "\"City\": \""+city+"\",\n";
+		s += "\"Postal Code\": \""+postalCode+"\",\n";
+		s += "\"Country\": \""+country+"\"\n";
+		s += "},\n";
+		return s;
+	}
+	
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
@@ -73,6 +83,5 @@ public class Address {
 		if(street.equals(a.street) && city.equals(a.city) && postalCode.equals(a.postalCode) && country.equals(a.country))
 			result = true;
 		return result;
-	}
-	
+	}	
 }

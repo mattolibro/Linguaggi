@@ -40,8 +40,15 @@ public class Job extends Duty {
 	@Override
 	public String toString() {
 		String s = "";
-		s += "Job Study: "+nameJob+"\n";
+		s += "Name Job: "+nameJob+"\n";
 		s += super.toString();
+		return s;
+	}
+	
+	public String toStringJSON() {
+		String s = "{\n\"Job\": {\n";
+		s += "\"NameJob\": \""+nameJob+"\",\n";
+		s += super.toStringJSON();
 		return s;
 	}
 	

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,8 @@ public class ManagementWindowApp {
 	private void initialize() {
 
 		people = new ArrayList<Person>();
+		
+		File file = new File("files/grammarSample.json");
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);

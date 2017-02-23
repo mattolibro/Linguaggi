@@ -88,6 +88,17 @@ public class Person {
 		return s;
 	}
 	
+	public String toStringJSON() {
+		String s = "{\n\"Person\": {\n";
+		s += "\"ID\": \""+ID+"\",\n";
+		s += "\"FirstName\": \""+firstName+"\",\n";
+		s += "\"LastName\": \""+lastName+"\",\n";
+		s += "\"DateOfBirth\": "+dateOfBirth.toString()+"\",\n";
+		s += address.toStringJSON();
+		s += cv.toStringJSON();
+		return s;
+	}
+	
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
