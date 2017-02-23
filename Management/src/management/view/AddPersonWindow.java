@@ -1,6 +1,10 @@
 package management.view;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,9 +17,13 @@ import management.model.Person;
 import management.model.Study;
 
 import javax.swing.JTextField;
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class AddPersonWindow extends JFrame {
 
@@ -34,7 +42,6 @@ public class AddPersonWindow extends JFrame {
 	
 	private JPanel panel;
 	private JLabel lblId;
-	private JTextField textField;
 	private JLabel cvLabel;
 	private JButton doneButton;
 	
@@ -44,6 +51,9 @@ public class AddPersonWindow extends JFrame {
 	
 	private ManagementWindowApp mwa;
 	private JFrame frame;
+	private JPanel panel_1;
+	private JTextField textField;
+	private JLabel img_label;
 	/**
 	 * Create the frame.
 	 */
@@ -62,7 +72,7 @@ public class AddPersonWindow extends JFrame {
 
 		setTitle("Add Person");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 130);
+		setBounds(100, 100, 330, 145);
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,16 +92,39 @@ public class AddPersonWindow extends JFrame {
 			lblId = new JLabel("ID");
 			panel.add(lblId, BorderLayout.NORTH);
 
-			textField = new JTextField();
-			panel.add(textField, BorderLayout.CENTER);
-			textField.setColumns(10);
-
 			doneButton = new JButton("DONE");
 	
 			PersonMouseAdapter personMouseAdapter = new PersonMouseAdapter(this);
 			doneButton.addMouseListener(personMouseAdapter);
 			panel.add(doneButton, BorderLayout.SOUTH);
 			
+			panel_1 = new JPanel();
+			panel.add(panel_1, BorderLayout.CENTER);
+			
+			textField = new JTextField();
+			textField.setColumns(10);
+			
+			img_label = new JLabel();
+			
+			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+			gl_panel_1.setHorizontalGroup(
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+			);
+			gl_panel_1.setVerticalGroup(
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+						.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+			);
+			panel_1.setLayout(gl_panel_1);
+			System.out.println(img_label.getWidth()+" "+ img_label.getHeight());
+			
+			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+			img_label.setIcon(imageIcon);
 		}
 		
 	}
@@ -264,5 +297,4 @@ public class AddPersonWindow extends JFrame {
 		frame.setEnabled(true);
 		this.dispose();
 	}
-	
 }
