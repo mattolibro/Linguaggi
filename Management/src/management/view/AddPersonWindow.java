@@ -2,9 +2,6 @@ package management.view;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -121,7 +117,6 @@ public class AddPersonWindow extends JFrame {
 						.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
 			);
 			panel_1.setLayout(gl_panel_1);
-			System.out.println(img_label.getWidth()+" "+ img_label.getHeight());
 			
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 			img_label.setIcon(imageIcon);
@@ -169,6 +164,8 @@ public class AddPersonWindow extends JFrame {
 			break;
 			
 		case "Date of Birth":
+			if(textField.getText().equals(""))
+				System.out.println("yeah");
 			person.setDateOfBirth((textField.getText()));
 			textField.setText("");
 			textField.setToolTipText(null);

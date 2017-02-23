@@ -38,7 +38,10 @@ public abstract class Duty {
 	}
 	
 	public void setEndDate(String endDate) {
-		this.endDate = LocalDate.parse(endDate);
+		if(!endDate.equals(""))
+			this.endDate = LocalDate.parse(endDate);
+		else
+			this.endDate = null;
 	}
 	
 	@Override
