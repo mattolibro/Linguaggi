@@ -67,7 +67,7 @@ public class AddPersonWindow extends JFrame {
 		job = new Job();
 
 		setTitle("Add Person");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 330, 145);
 		setResizable(false);
 		contentPane = new JPanel();
