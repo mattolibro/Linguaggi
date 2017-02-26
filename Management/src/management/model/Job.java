@@ -46,8 +46,8 @@ public class Job extends Duty {
 	}
 	
 	public String toStringJSON() {
-		String s = "{\n\"Job\": {\n";
-		s += "\"NameJob\": \""+nameJob+"\",\n";
+		String s = "            {\n              \"Job\": {\n";
+		s += "                \"NameJob\": \""+nameJob+"\",\n";
 		s += super.toStringJSON();
 		return s;
 	}

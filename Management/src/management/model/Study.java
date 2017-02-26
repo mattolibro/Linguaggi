@@ -46,8 +46,8 @@ public class Study extends Duty {
 	}
 	
 	public String toStringJSON() {
-		String s = "{\n\"Study\": {\n";
-		s += "\"NameStudy\": \""+nameStudy+"\",\n";
+		String s = "            {\n            \"Study\": {\n";
+		s += "                \"NameStudy\": \""+nameStudy+"\",\n";
 		s += super.toStringJSON();
 		return s;
 	}

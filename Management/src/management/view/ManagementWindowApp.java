@@ -94,13 +94,17 @@ public class ManagementWindowApp {
 		JScrollPane scrollPane = new JScrollPane (textArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
 		JLabel lblPeople = new JLabel("People");
+		
+		JButton btnJsonFile = new JButton("JSON file");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(20)
-					.addComponent(btnAddPerson)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnAddPerson)
+						.addComponent(btnJsonFile))
+					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblPeople)
@@ -112,7 +116,9 @@ public class ManagementWindowApp {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(65)
 					.addComponent(btnAddPerson)
-					.addContainerGap(183, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(btnJsonFile)
+					.addContainerGap(142, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(lblPeople)
 					.addPreferredGap(ComponentPlacement.RELATED)

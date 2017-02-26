@@ -75,32 +75,32 @@ public class CV {
 	}
 
 	public String toStringJSON() {
-		String s = "\"CV\": {\n";
-		s += "\"Studies\": [\n";	
+		String s = "        \"CV\": {\n";
+		s += "          \"Studies\": [\n";	
 		for (int i = 0; i < studies.size(); i++) {
 			if(i == studies.size()-1)
 				s += studies.get(i).toStringJSON()+"\n";
 			else
 				s += studies.get(i).toStringJSON()+",\n";
 		}
-		s +="],\n";
-		s += "\"LanguagesKnown\": [\n";
+		s +="          ],\n";
+		s += "          \"LanguagesKnown\": [\n";
 		for (int i = 0; i < languagesKnown.size(); i++) {
 			if (i == languagesKnown.size()-1)
-				s += "\""+languagesKnown.get(i)+"\"\n";
+				s += "            \""+languagesKnown.get(i)+"\"\n";
 			else
-				s += "\""+languagesKnown.get(i)+"\",\n";
+				s += "            \""+languagesKnown.get(i)+"\",\n";
 		}
 
-		s +="],\n";
-		s += "\"Jobs\": [\n";	
+		s +="          ],\n";
+		s += "          \"Jobs\": [\n";	
 		for (int i = 0; i < jobs.size(); i++) {
 			if(i == jobs.size()-1)
 				s += jobs.get(i).toStringJSON()+"\n";
 			else
 				s += jobs.get(i).toStringJSON()+",\n";
 		}
-		s += "]\n}\n}\n";
+		s += "          ]\n        }\n      }\n";
 		return s;
 	}
 

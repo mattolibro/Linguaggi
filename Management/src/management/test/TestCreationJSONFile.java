@@ -24,9 +24,8 @@ public class TestCreationJSONFile {
 	private static BufferedReader in;
 
 	public static void main(String[] args) throws IOException {
-		int numLines = countLines("files/grammarSample.json");
-		int count = 0;
 
+		/*----Person data to write in JSON file already created------*/
 		List<Study> studies = new ArrayList<Study>();
 		studies.add(new Study("Computer Science", "Universita Bologna", LocalDate.parse("2011-09-11"), LocalDate.parse("2014-06-18")));
 		studies.add(new Study("Master Software Architecture", "Universita Bologna", LocalDate.parse("2014-09-11"), LocalDate.parse("2017-06-18")));
@@ -36,9 +35,28 @@ public class TestCreationJSONFile {
 		List<Job> jobs = new ArrayList<Job>();
 		jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
 		Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
-		System.out.println(personExpected.toString());
-		
+
+		int numLines = countLines("files/grammarSample.json");
+		int count = 0;
+
 		Writer writer = null;
+
+		/*
+		 *The file created is JSON valid  
+		 *
+		 * try {
+
+			writer = new BufferedWriter(new FileWriter("files/grammarSampleNew.json"));
+			writer.write(personExpected.toStringJSON());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null) 
+				try { 
+					writer.close();
+				} catch (IOException ignore) {}
+		}*/
 
 		try {
 			writer = new BufferedWriter(new FileWriter("files/grammarSampleNew.json"));
@@ -46,13 +64,19 @@ public class TestCreationJSONFile {
 			in = new BufferedReader(new FileReader("files/grammarSample.json"));
 			String line;
 			while((line = in.readLine()) != null) {
-				System.out.println(line);
 				count++;
-				writer.write(line+"\n");
+
 				if (count == numLines-2) {
-					System.out.println(personExpected.toString());
-					writer.write(personExpected.toString());
+					writer.write(line+",\n");
+					System.out.println(personExpected.toStringJSON());
+					writer.write(personExpected.toStringJSON());
 				}
+				else {
+					System.out.println(line);
+					writer.write(line+"\n");
+				}
+
+
 			}
 
 		} catch (IOException e) {

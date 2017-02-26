@@ -60,12 +60,12 @@ public class Address {
 	}
 	
 	public String toStringJSON() {
-		String s = "\"Address\": {\n";
-		s += "\"Street\": \""+street+"\",\n";
-		s += "\"City\": \""+city+"\",\n";
-		s += "\"Postal Code\": \""+postalCode+"\",\n";
-		s += "\"Country\": \""+country+"\"\n";
-		s += "},\n";
+		String s = "        \"Address\": {\n";
+		s += "          \"Street\": \""+street+"\",\n";
+		s += "          \"City\": \""+city+"\",\n";
+		s += "          \"Postal Code\": \""+postalCode+"\",\n";
+		s += "          \"Country\": \""+country+"\"\n";
+		s += "        },\n";
 		return s;
 	}
 	

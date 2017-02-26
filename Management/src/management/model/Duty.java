@@ -59,13 +59,13 @@ public abstract class Duty {
 	
 	public String toStringJSON() {
 		String s = "";
-		s += "\"At\": \""+at+"\",\n";
-		s += "\"DateOfStart\": \""+startDate.toString()+"\",\n";
+		s += "                \"At\": \""+at+"\",\n";
+		s += "                \"DateOfStart\": \""+startDate.toString()+"\",\n";
 		if(endDate != null)
-			s += "\"DateOfEnd\": \""+endDate.toString()+"\"\n";
+			s += "                \"DateOfEnd\": \""+endDate.toString()+"\"\n";
 		else
-			s += "\"DateOfEnd\": \"\"\n";
-		s += "}\n}";
+			s += "                \"DateOfEnd\": \"\"\n";
+		s += "              }\n            }";
 		return s;
 	}
 	

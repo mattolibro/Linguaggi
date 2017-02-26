@@ -84,18 +84,19 @@ public class Person {
 		s += "Date of birth: "+dateOfBirth.getDayOfMonth()+"/"+dateOfBirth.getMonthValue()+"/"+dateOfBirth.getYear()+"\n";
 		s += address.toString();
 		s += cv.toString();
-		s +="\n\n";
+		s +="\n";
 		return s;
 	}
 	
 	public String toStringJSON() {
-		String s = "{\n\"Person\": {\n";
-		s += "\"ID\": \""+ID+"\",\n";
-		s += "\"FirstName\": \""+firstName+"\",\n";
-		s += "\"LastName\": \""+lastName+"\",\n";
-		s += "\"DateOfBirth\": "+dateOfBirth.toString()+"\",\n";
+		String s = "    {\n      \"Person\": {\n";
+		s += "        \"ID\": \""+ID+"\",\n";
+		s += "        \"FirstName\": \""+firstName+"\",\n";
+		s += "        \"LastName\": \""+lastName+"\",\n";
+		s += "        \"DateOfBirth\": \""+dateOfBirth.toString()+"\",\n";
 		s += address.toStringJSON();
 		s += cv.toStringJSON();
+		s += "    }\n";
 		return s;
 	}
 	
