@@ -1,13 +1,11 @@
 package management.test;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Writer;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +16,7 @@ import management.model.CV;
 import management.model.Job;
 import management.model.Person;
 import management.model.Study;
+import management.model.Utilities;
 
 public class TestCreationJSONFile {
 
@@ -36,7 +35,7 @@ public class TestCreationJSONFile {
 		jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
 		Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
 
-		int numLines = countLines("files/grammarSample.json");
+		int numLines = Utilities.countLines("files/grammarSample.json");
 		int count = 0;
 
 		Writer writer = null;
@@ -75,9 +74,9 @@ public class TestCreationJSONFile {
 					System.out.println(line);
 					writer.write(line+"\n");
 				}
-
-
 			}
+			
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -86,32 +85,15 @@ public class TestCreationJSONFile {
 				try { 
 					writer.close();
 					in.close(); 
+					File file1 = new File("files/grammarSample.json");
+					file1.delete();
+					File file2 = new File("files/grammarSampleNew.json");
+					file2.renameTo(file1);
 				} catch (IOException ignore) {}
 		}
 
 
 
-	}
-
-	public static int countLines(String filename) throws IOException {
-		InputStream is = new BufferedInputStream(new FileInputStream(filename));
-		try {
-			byte[] c = new byte[1024];
-			int count = 0;
-			int readChars = 0;
-			boolean empty = true;
-			while ((readChars = is.read(c)) != -1) {
-				empty = false;
-				for (int i = 0; i < readChars; ++i) {
-					if (c[i] == '\n') {
-						++count;
-					}
-				}
-			}
-			return (count == 0 && !empty) ? 1 : count;
-		} finally {
-			is.close();
-		}
 	}
 
 }

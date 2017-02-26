@@ -90,12 +90,29 @@ public class ManagementWindowApp {
 			}
 		});
 		
+		JButton btnJsonFile = new JButton("Show JSON file");
+		btnJsonFile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JFrame jsonFileFrame = new JSONFileWindow(file);
+				jsonFileFrame.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosing(WindowEvent e) {
+						frame.setEnabled(true);
+						e.getWindow().dispose();
+					}
+				});
+				jsonFileFrame.setVisible(true);	
+				frame.setEnabled(false);
+			}
+		});
+		
+		
 		textArea = new JTextArea();
 		JScrollPane scrollPane = new JScrollPane (textArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
-		JLabel lblPeople = new JLabel("People");
+		JLabel lblPeople = new JLabel("People");		
 		
-		JButton btnJsonFile = new JButton("JSON file");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
