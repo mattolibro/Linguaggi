@@ -60,6 +60,7 @@ public class AddPersonWindow extends JFrame {
 		
 		frame.setEnabled(false);
 
+		/* Initialization of all the objects used*/
 		person = new Person();
 		address = new Address();
 		cv = new CV();
@@ -146,14 +147,12 @@ public class AddPersonWindow extends JFrame {
 			person.setID(textField.getText());
 			textField.setText("");
 			lblId.setText("FirstName");
-			System.out.println(person.getID());
 			break;
 			
 		case "FirstName":
 			person.setFirstName(textField.getText());
 			textField.setText("");
 			lblId.setText("LastName");
-			System.out.println(person.getFirstName());
 			break;
 			
 		case "LastName":
@@ -161,7 +160,6 @@ public class AddPersonWindow extends JFrame {
 			textField.setText("");
 			lblId.setText("Date of Birth");
 			textField.setToolTipText("yyyy-mm-dd");
-			System.out.println(person.getLastName());
 			break;
 			
 		case "Date of Birth":
@@ -171,7 +169,6 @@ public class AddPersonWindow extends JFrame {
 			textField.setText("");
 			textField.setToolTipText(null);
 			lblId.setText("Street");
-			System.out.println(person.getDateOfBirth().toString());
 			break;
 			
 		case "Street":

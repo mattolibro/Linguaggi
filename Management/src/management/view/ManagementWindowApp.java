@@ -30,6 +30,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class ManagementWindowApp {
 
 	private List<Person> people;
+	File file;
 
 	private JFrame frame;
 	private ManagementWindowApp mwa = this;
@@ -66,7 +67,7 @@ public class ManagementWindowApp {
 
 		people = new ArrayList<Person>();
 		
-		File file = new File("files/grammarSample.json");
+		file = new File("files/grammarSample.json");
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -164,4 +165,42 @@ public class ManagementWindowApp {
 		people.add(person);
 		textArea.setText(textArea.getText()+"Person "+ people.size()+":\n\n"+person.toString());
 	}
+	
+	/*private void updateJSONFile() {
+		try {
+			writer = new BufferedWriter(new FileWriter("files/grammarSampleNew.json"));
+
+			in = new BufferedReader(new FileReader("files/grammarSample.json"));
+			String line;
+			while((line = in.readLine()) != null) {
+				count++;
+
+				if (count == numLines-2) {
+					writer.write(line+",\n");
+					System.out.println(personExpected.toStringJSON());
+					writer.write(personExpected.toStringJSON());
+				}
+				else {
+					System.out.println(line);
+					writer.write(line+"\n");
+				}
+			}
+			
+			
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null) 
+				try { 
+					writer.close();
+					in.close(); 
+					File file1 = new File("files/grammarSample.json");
+					file1.delete();
+					File file2 = new File("files/grammarSampleNew.json");
+					file2.renameTo(file1);
+				} catch (IOException ignore) {}
+		}
+
+	}*/
 }
