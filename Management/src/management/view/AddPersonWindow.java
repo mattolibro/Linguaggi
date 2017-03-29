@@ -2,6 +2,7 @@ package management.view;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +13,8 @@ import management.model.CV;
 import management.model.Job;
 import management.model.Person;
 import management.model.Study;
+import management.speech.microphone.Microphone;
+import net.sourceforge.javaflacencoder.FLACFileWriter;
 
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
