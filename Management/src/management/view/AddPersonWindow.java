@@ -2,7 +2,6 @@ package management.view;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
-import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,8 +12,7 @@ import management.model.CV;
 import management.model.Job;
 import management.model.Person;
 import management.model.Study;
-import management.speech.microphone.Microphone;
-import net.sourceforge.javaflacencoder.FLACFileWriter;
+import management.speech.SpeechInput;
 
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -23,6 +21,10 @@ import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingWorker;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AddPersonWindow extends JFrame {
 
@@ -30,8 +32,6 @@ public class AddPersonWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private JPanel contentPane;
 
 	private Person person;
 	private Address address;
@@ -39,6 +39,9 @@ public class AddPersonWindow extends JFrame {
 	private Study study;
 	private Job job;
 	
+	private AddPersonWindow addPersonWindow = this;
+	
+	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblId;
 	private JLabel cvLabel;
@@ -53,6 +56,8 @@ public class AddPersonWindow extends JFrame {
 	private JPanel panel_1;
 	private JTextField textField;
 	private JLabel img_label;
+	private JLabel recording_label;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -104,21 +109,49 @@ public class AddPersonWindow extends JFrame {
 			textField = new JTextField();
 			textField.setColumns(10);
 			
+			recording_label = new JLabel("");
+			
 			img_label = new JLabel();
+			img_label.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("Label was clicked!"); // debug
+					SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
+					    @Override
+					    protected String doInBackground() throws Exception {
+					    	recording_label.setText("Recording...");
+							SpeechInput speechInput = new SpeechInput(addPersonWindow);
+							speechInput.recording();
+					        return null;
+					    }
+					};
+					myWorker.execute();
+					
+				}
+			});
+			
+			
 			
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 			gl_panel_1.setHorizontalGroup(
-				gl_panel_1.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+				gl_panel_1.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel_1.createSequentialGroup()
 						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_1.createSequentialGroup()
+						.addContainerGap(258, Short.MAX_VALUE)
+						.addComponent(recording_label)
+						.addContainerGap())
 			);
 			gl_panel_1.setVerticalGroup(
 				gl_panel_1.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-						.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_1.createSequentialGroup()
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+							.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+						.addGap(1)
+						.addComponent(recording_label))
 			);
 			panel_1.setLayout(gl_panel_1);
 			
@@ -129,15 +162,23 @@ public class AddPersonWindow extends JFrame {
 		
 	}
 	
-	void setTextLabel(String text) {
+	public void setRecording_label(String text) {
+		recording_label.setText(text);
+	}
+	
+	public void setTextLabel(String text) {
 		lblId.setText(text);
 	}
 	
-	void removeLanguageMouseAdapter() {
+	public void setTextField(String text) {
+		textField.setText(text);
+	}
+	
+	public void removeLanguageMouseAdapter() {
 		doneButton.removeMouseListener(languageMouseAdapter);
 	}
 	
-	void addLanguageMouseAdapter(LanguageMouseAdapter languageMouseAdapter) {
+	public void addLanguageMouseAdapter(LanguageMouseAdapter languageMouseAdapter) {
 		this.languageMouseAdapter = languageMouseAdapter;
 		doneButton.addMouseListener(this.languageMouseAdapter);
 	}
