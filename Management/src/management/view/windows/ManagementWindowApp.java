@@ -103,63 +103,84 @@ public class ManagementWindowApp {
 		btnJsonFile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JFrame jsonFileFrame = new JSONFileWindow(file);
-				jsonFileFrame.addWindowListener(new WindowAdapter() {
+				JSONFileWindow jsonFileWindow = new JSONFileWindow(file);
+				jsonFileWindow.addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent e) {
 						frame.setEnabled(true);
 						e.getWindow().dispose();
 					}
 				});
-				jsonFileFrame.setVisible(true);	
+				jsonFileWindow.setVisible(true);	
 				frame.setEnabled(false);
 			}
 		});
-
-
-		textArea = new JTextArea();
-		JScrollPane scrollPane = new JScrollPane (textArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		JButton searchButton = new JButton("Search Person");
+		searchButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
+				    @Override
+				    protected String doInBackground() throws Exception {
+						SearchWindow searchWindow = new SearchWindow();
+						searchWindow.addWindowListener(new WindowAdapter() {
+							@Override
+							public void windowClosing(WindowEvent e) {
+								frame.setEnabled(true);
+								e.getWindow().dispose();
+							}
+						});
+						searchWindow.setVisible(true);
+						frame.setEnabled(false);
+				        return null;
+				    }
+				};
+				myWorker.execute();
+				
+			}
+		});
 
 		JLabel lblPeople = new JLabel("People");		
 		
-		JButton btnNewButton = new JButton("Search");
+		textArea = new JTextArea();
+		JScrollPane scrollPane = new JScrollPane (textArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnJsonFile)
-							.addGap(18))
-						.addComponent(btnAddPerson))
-					.addGap(36)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPeople)
-							.addContainerGap())
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
-		);
+						.addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(searchButton)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(btnJsonFile)
+										.addGap(18))
+								.addComponent(btnAddPerson))
+						.addGap(36)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblPeople)
+										.addContainerGap())
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
+				);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(72)
-					.addComponent(btnAddPerson)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnNewButton)
-					.addGap(13)
-					.addComponent(btnJsonFile)
-					.addContainerGap(106, Short.MAX_VALUE))
+						.addGap(72)
+						.addComponent(btnAddPerson)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(searchButton)
+						.addGap(13)
+						.addComponent(btnJsonFile)
+						.addContainerGap(106, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(lblPeople)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
-		);
+						.addComponent(lblPeople)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+				);
 		frame.getContentPane().setLayout(groupLayout);
 
-		
 		listPeopleInitialization();
 	}
 
@@ -192,22 +213,23 @@ public class ManagementWindowApp {
 			}
 		}
 	}
+
 	public void addPerson(Person person) {
 		people.add(person);
 		textArea.setText(textArea.getText()+"Person "+ people.size()+":\n\n"+person.toString());
-		
+
 		/* it updates the JSONFile in a new thread. I just wanna keep this update separately from the main thread */
 		SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
-		    @Override
-		    protected String doInBackground() throws Exception {
-		    	updateJSONFile(person); // updates the JSONFile
-		        return null;
-		    }
+			@Override
+			protected String doInBackground() throws Exception {
+				updateJSONFile(person); // updates the JSONFile
+				return null;
+			}
 		};
 		myWorker.execute();
-		
+
 	}
-	
+
 	private void updateJSONFile(Person person) {
 		BufferedReader in = null;
 		try {

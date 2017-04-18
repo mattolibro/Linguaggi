@@ -5,15 +5,17 @@ import java.io.File;
 import management.speech.recognizer.Recognizer;
 import management.speech.request.Languages;
 import management.speech.response.GoogleResponse;
-import management.view.windows.AddPersonWindow;
+import management.view.windows.SearchWindow;
+import management.view.windows.SpeechTemplateSpeech;
 import management.speech.microphone.Microphone;
 import net.sourceforge.javaflacencoder.FLACFileWriter;
 
 public class SpeechInput extends Thread{
 
-	private AddPersonWindow frame;
+	private SpeechTemplateSpeech frame;
 
-	public SpeechInput(AddPersonWindow frame) {
+	public SpeechInput(SpeechTemplateSpeech frame) {
+		
 		this.frame = frame;
 	}
 
@@ -31,6 +33,8 @@ public class SpeechInput extends Thread{
 		frame.setRecording_label("Recording..."); // update the label on the addPerson frame (recording started)
 		try {
 			System.out.println("Recording...");
+			if(frame instanceof SearchWindow)
+				Thread.sleep(2000);
 			Thread.sleep(3000);
 			microphone.close();
 		} catch (InterruptedException ex) {

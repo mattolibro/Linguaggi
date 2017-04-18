@@ -26,7 +26,11 @@ public abstract class Duty {
 	}
 	
 	public void setStartDate(String startDate) {
-		this.startDate = LocalDate.parse(startDate);
+		if(!startDate.equals("")) // usefull for debugging
+			this.startDate = LocalDate.parse(startDate);
+		else
+			this.startDate = null;
+		
 	}
 
 	public LocalDate getEndDate() {

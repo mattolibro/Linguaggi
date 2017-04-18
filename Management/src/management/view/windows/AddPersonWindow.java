@@ -31,7 +31,7 @@ import javax.swing.SwingWorker;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AddPersonWindow extends JFrame {
+public class AddPersonWindow extends SpeechTemplateSpeech {
 
 	/**
 	 * 
@@ -223,6 +223,7 @@ public class AddPersonWindow extends JFrame {
 			break;
 			
 		case "Date of Birth":
+	
 			person.setDateOfBirth((textField.getText()));
 			textField.setText("");
 			textField.setToolTipText(null);
