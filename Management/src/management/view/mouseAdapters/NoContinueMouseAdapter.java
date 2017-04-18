@@ -1,7 +1,10 @@
-package management.view;
+package management.view.mouseAdapters;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import management.view.windows.AddPersonWindow;
+import management.view.windows.ContinueToInsertDialog;
 
 public class NoContinueMouseAdapter extends MouseAdapter {
 	
@@ -34,7 +37,7 @@ public void mouseClicked(MouseEvent e) {
 			break;
 			
 		case "Job":
-			addPersonWindow.savePerson();
+			addPersonWindow.savePerson(); // here person is saved
 			break;
 		}
 		

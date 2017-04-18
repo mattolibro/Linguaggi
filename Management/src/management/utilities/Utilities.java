@@ -1,4 +1,4 @@
-package management.model;
+package management.utilities;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

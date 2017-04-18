@@ -1,4 +1,4 @@
-package management.view;
+package management.view.windows;
 
 import java.awt.EventQueue;
 
@@ -8,20 +8,28 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.File;
-import java.time.LocalDate;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import management.model.Address;
-import management.model.CV;
-import management.model.Job;
+import management.model.PeopleJsonFactory;
 import management.model.Person;
-import management.model.Study;
+import management.utilities.Utilities;
 
 import javax.swing.JTextArea;
+import javax.swing.SwingWorker;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -29,7 +37,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ManagementWindowApp {
 
-	private List<Person> people;
+	private List<Person> people; // people are also in this collection and not just in the JSON file
 	File file;
 
 	private JFrame frame;
@@ -113,94 +121,122 @@ public class ManagementWindowApp {
 		JScrollPane scrollPane = new JScrollPane (textArea,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		JLabel lblPeople = new JLabel("People");		
+		
+		JButton btnNewButton = new JButton("Search");
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnAddPerson)
-								.addComponent(btnJsonFile))
-						.addGap(18)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(lblPeople)
-										.addContainerGap())
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)))
-				);
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnNewButton)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnJsonFile)
+							.addGap(18))
+						.addComponent(btnAddPerson))
+					.addGap(36)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblPeople)
+							.addContainerGap())
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)))
+		);
 		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(65)
-						.addComponent(btnAddPerson)
-						.addGap(18)
-						.addComponent(btnJsonFile)
-						.addContainerGap(142, Short.MAX_VALUE))
+					.addGap(72)
+					.addComponent(btnAddPerson)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnNewButton)
+					.addGap(13)
+					.addComponent(btnJsonFile)
+					.addContainerGap(106, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(lblPeople)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
-				);
+					.addComponent(lblPeople)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+		);
 		frame.getContentPane().setLayout(groupLayout);
 
-		/*---Sample person--------*/
-		List<Study> studies = new ArrayList<Study>();
-		studies.add(new Study("Computer Science", "Universita Bologna", LocalDate.parse("2011-09-11"), LocalDate.parse("2014-06-18")));
-		studies.add(new Study("Master Software Architecture", "Universita Bologna", LocalDate.parse("2014-09-11"), LocalDate.parse("2017-06-18")));
-		List<String> languagesKnown = new ArrayList<String>();
-		languagesKnown.add("Italian");
-		languagesKnown.add("English");
-		List<Job> jobs = new ArrayList<Job>();
-		jobs.add(new Job("Programmer", "Ubisoft", LocalDate.parse("2017-07-20"), null));
-		Person personExpected = new Person("ID-000001", "Pippo", "Baudo", LocalDate.parse("1989-07-31"), new Address("via della vittoria, 21", "Bologna", "40100", "Monopoli"), new CV(studies, languagesKnown, jobs));
-
-		people.add(personExpected);
-
-		textArea.setText("Person "+ people.size()+":\n\n"+personExpected.toString());
-		/*------------------------------------------------*/
+		listPeopleInitialization();
 	}
 
+	/* it initializes the collection of people and updates the textArea */
+	private void listPeopleInitialization() {
+		InputStream fis = null;
+		try {
+			fis = new FileInputStream(file);
+			JsonReader rdr = Json.createReader(fis);
+			JsonObject obj =  rdr.readObject();
+			JsonArray results = obj.getJsonArray("People");
+			int count = 1;
+			for (JsonObject result : results.getValuesAs(JsonObject.class)) {
+				PeopleJsonFactory peopleJSonFactory = new PeopleJsonFactory(result.getJsonObject("Person"));
+				people.add(peopleJSonFactory.createPerson());
+				textArea.setText(textArea.getText()+"Person "+ count +":\n\n"+people.get(count-1).toString()+"\n");
+				count++;
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (fis != null)
+					fis.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 	public void addPerson(Person person) {
 		people.add(person);
 		textArea.setText(textArea.getText()+"Person "+ people.size()+":\n\n"+person.toString());
+		
+		/* it updates the JSONFile in a new thread. I just wanna keep this update separately from the main thread */
+		SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
+		    @Override
+		    protected String doInBackground() throws Exception {
+		    	updateJSONFile(person); // updates the JSONFile
+		        return null;
+		    }
+		};
+		myWorker.execute();
+		
 	}
-
-	/*private void updateJSONFile() {
+	
+	private void updateJSONFile(Person person) {
+		BufferedReader in = null;
 		try {
-			writer = new BufferedWriter(new FileWriter("files/grammarSampleNew.json"));
-
-			in = new BufferedReader(new FileReader("files/grammarSample.json"));
+			in = new BufferedReader(new FileReader(file));
 			String line;
+			int count = 0;
+			int numLines = Utilities.countLines(file.getPath());
+			String textFile = "";
+
 			while((line = in.readLine()) != null) {
 				count++;
 
 				if (count == numLines-2) {
-					writer.write(line+",\n");
-					System.out.println(personExpected.toStringJSON());
-					writer.write(personExpected.toStringJSON());
+					textFile +=line+",\n"+ person.toStringJSON();
 				}
 				else {
-					System.out.println(line);
-					writer.write(line+"\n");
+					textFile += line+"\n";
 				}
 			}
-
-
+			FileWriter writer = new FileWriter(file, false);
+			writer.write(textFile);
+			writer.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (writer != null) 
+			if (in != null) 
 				try { 
-					writer.close();
 					in.close(); 
-					File file1 = new File("files/grammarSample.json");
-					file1.delete();
-					File file2 = new File("files/grammarSampleNew.json");
-					file2.renameTo(file1);
+
 				} catch (IOException ignore) {}
 		}
-
-	}*/
+	}
 }

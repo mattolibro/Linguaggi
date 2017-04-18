@@ -16,7 +16,7 @@ import management.model.CV;
 import management.model.Job;
 import management.model.Person;
 import management.model.Study;
-import management.model.Utilities;
+import management.utilities.Utilities;
 
 public class TestCreationJSONFile {
 

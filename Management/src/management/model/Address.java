@@ -63,7 +63,7 @@ public class Address {
 		String s = "        \"Address\": {\n";
 		s += "          \"Street\": \""+street+"\",\n";
 		s += "          \"City\": \""+city+"\",\n";
-		s += "          \"Postal Code\": \""+postalCode+"\",\n";
+		s += "          \"PostalCode\": \""+postalCode+"\",\n";
 		s += "          \"Country\": \""+country+"\"\n";
 		s += "        },\n";
 		return s;

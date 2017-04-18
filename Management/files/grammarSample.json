@@ -2,7 +2,7 @@
   "People": [
     {
       "Person": {
-        "ID": "ID-000001",
+        "ID": "001",
         "FirstName": "Pippo",
         "LastName": "Baudo",
         "DateOfBirth": "1989-07-31",
@@ -42,6 +42,46 @@
                 "At": "Ubisoft",
                 "StartDate": "2017-07-20",
                 "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "002",
+        "FirstName": "Max",
+        "LastName": "Power",
+        "DateOfBirth": "1989-07-31",
+        "Address": {
+          "Street": "via del bosco, 31",
+          "City": "Bologna",
+          "PostalCode": "40100",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Economics",
+                "At": "University of Bologna",
+                "StartDate": "2013-01-08",
+                "EndDate": "2017-01-05"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "Dutch"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Business employee",
+                "At": "Ima",
+                "StartDate": "2017-02-03",
+                "EndDate": "2017-04-24"
               }
             }
           ]

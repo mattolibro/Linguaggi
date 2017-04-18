@@ -1,4 +1,4 @@
-package management.view;
+package management.view.windows;
 
 import java.awt.BorderLayout;
 import java.io.BufferedReader;
@@ -9,8 +9,6 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import management.model.Utilities;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -25,8 +23,7 @@ public class JSONFileWindow extends JFrame {
 	private JTextArea textArea;
 
 	private File file;
-	BufferedReader in;
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -53,23 +50,15 @@ public class JSONFileWindow extends JFrame {
 	}
 
 	private void updateTextJSONFile() {
-
+		BufferedReader in = null;
+		
 		try {
 			in = new BufferedReader(new FileReader(file));
 			String line;
-			int count = 0;
-			int numLines = Utilities.countLines(file.getPath());
 			String textFile = "";
 
 			while((line = in.readLine()) != null) {
-				count++;
-
-				if (count == numLines-2) {
-					textFile +=line+",\n";
-				}
-				else {
-					textFile += line+"\n";
-				}
+				textFile += line+"\n";
 			}
 			textArea.setText(textFile);
 
@@ -82,7 +71,7 @@ public class JSONFileWindow extends JFrame {
 
 				} catch (IOException ignore) {}
 		}
-		
+
 	}
 
 }

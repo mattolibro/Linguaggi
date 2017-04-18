@@ -1,7 +1,9 @@
-package management.view;
+package management.view.mouseAdapters;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import management.view.windows.AddPersonWindow;
 
 public class PersonMouseAdapter extends MouseAdapter {
 

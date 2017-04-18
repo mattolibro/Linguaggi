@@ -1,6 +1,7 @@
-package management.view;
+package management.view.windows;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -13,6 +14,10 @@ import management.model.Job;
 import management.model.Person;
 import management.model.Study;
 import management.speech.SpeechInput;
+import management.view.mouseAdapters.JobMouseAdapter;
+import management.view.mouseAdapters.LanguageMouseAdapter;
+import management.view.mouseAdapters.PersonMouseAdapter;
+import management.view.mouseAdapters.StudyMouseAdapter;
 
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -20,7 +25,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingWorker;
 
 import java.awt.event.MouseAdapter;
@@ -55,7 +59,6 @@ public class AddPersonWindow extends JFrame {
 	private JFrame frame;
 	private JPanel panel_1;
 	private JTextField textField;
-	private JLabel img_label;
 	private JLabel recording_label;
 	
 	/**
@@ -68,12 +71,14 @@ public class AddPersonWindow extends JFrame {
 		
 		frame.setEnabled(false);
 
-		/* Initialization of all the objects used*/
+		/* Initialization of all the objects used */
 		person = new Person();
 		address = new Address();
 		cv = new CV();
 		study = new Study();
 		job = new Job();
+		
+		/*----------------------------------------*/
 
 		setTitle("Add Person");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -88,7 +93,7 @@ public class AddPersonWindow extends JFrame {
 		contentPane.add(cvLabel, BorderLayout.NORTH);
 		cvLabel.setVisible(false);
 		
-		//Panel changes after every click on DONE
+		// Panel changes after every click on DONE
 		{
 			panel = new JPanel();
 			contentPane.add(panel, BorderLayout.CENTER);
@@ -110,16 +115,17 @@ public class AddPersonWindow extends JFrame {
 			textField.setColumns(10);
 			
 			recording_label = new JLabel("");
+			Font fontRecordingLabel  = new Font(recording_label.getFont().getName(), Font.ITALIC, recording_label.getFont().getSize());
+			recording_label.setFont(fontRecordingLabel);
 			
-			img_label = new JLabel();
-			img_label.addMouseListener(new MouseAdapter() {
+			JButton speechRecognitionButton = new JButton("");
+			speechRecognitionButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("Label was clicked!"); // debug
+					System.out.println("Label was clicked!"); // debug -- to remove!
 					SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
 					    @Override
 					    protected String doInBackground() throws Exception {
-					    	recording_label.setText("Recording...");
 							SpeechInput speechInput = new SpeechInput(addPersonWindow);
 							speechInput.recording();
 					        return null;
@@ -130,18 +136,25 @@ public class AddPersonWindow extends JFrame {
 				}
 			});
 			
+			// Icon for using the speech recognition
+			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
+			speechRecognitionButton.setIcon(imageIcon);
+			
+			
 			
 			
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 			gl_panel_1.setHorizontalGroup(
 				gl_panel_1.createParallelGroup(Alignment.TRAILING)
 					.addGroup(gl_panel_1.createSequentialGroup()
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_panel_1.createSequentialGroup()
-						.addContainerGap(258, Short.MAX_VALUE)
-						.addComponent(recording_label)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+								.addGap(18)
+								.addComponent(speechRecognitionButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_panel_1.createSequentialGroup()
+								.addContainerGap(304, Short.MAX_VALUE)
+								.addComponent(recording_label)))
 						.addContainerGap())
 			);
 			gl_panel_1.setVerticalGroup(
@@ -149,15 +162,13 @@ public class AddPersonWindow extends JFrame {
 					.addGroup(gl_panel_1.createSequentialGroup()
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-							.addComponent(img_label, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+							.addComponent(speechRecognitionButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
 						.addGap(1)
 						.addComponent(recording_label))
 			);
 			panel_1.setLayout(gl_panel_1);
 			
-			//Icon for using the speech recognition
-			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
-			img_label.setIcon(imageIcon);
+			
 		}
 		
 	}
@@ -182,6 +193,10 @@ public class AddPersonWindow extends JFrame {
 		this.languageMouseAdapter = languageMouseAdapter;
 		doneButton.addMouseListener(this.languageMouseAdapter);
 	}
+	
+	/*
+	 * it changes the panel for each field
+	 */
 	
 	public void changePanel() {
 		

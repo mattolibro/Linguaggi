@@ -5,7 +5,7 @@ import java.io.File;
 import management.speech.recognizer.Recognizer;
 import management.speech.request.Languages;
 import management.speech.response.GoogleResponse;
-import management.view.AddPersonWindow;
+import management.view.windows.AddPersonWindow;
 import management.speech.microphone.Microphone;
 import net.sourceforge.javaflacencoder.FLACFileWriter;
 
@@ -28,6 +28,7 @@ public class SpeechInput extends Thread{
 			ex.printStackTrace();
 		}
 		
+		frame.setRecording_label("Recording..."); // update the label on the addPerson frame (recording started)
 		try {
 			System.out.println("Recording...");
 			Thread.sleep(3000);
@@ -36,7 +37,7 @@ public class SpeechInput extends Thread{
 			ex.printStackTrace();
 		}
 		microphone.close();
-		frame.setRecording_label("");
+		frame.setRecording_label(""); // update the label on the addPerson frame (recording stopped)
 		System.out.println("Recording stopped.");
 
 		Recognizer recognizer = new Recognizer(Languages.ITALIAN, System.getProperty("GOOGLE_API_KEY"));
