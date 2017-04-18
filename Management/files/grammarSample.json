@@ -87,6 +87,46 @@
           ]
         }
       }
+    },
+    {
+      "Person": {
+        "ID": "003",
+        "FirstName": "Jako",
+        "LastName": "Messina",
+        "DateOfBirth": "1990-01-04",
+        "Address": {
+          "Street": "via calvario 3",
+          "City": "Trapani",
+          "PostalCode": "91100",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Law",
+                "At": "Bocconi - Milano",
+                "StartDate": "2008-10-07",
+                "EndDate": "2014-07-09"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Lawyer",
+                "At": "Studio Bologna",
+                "StartDate": "2015-01-01",
+                "EndDate": "2017-01-01"
+              }
+            }
+          ]
+        }
+      }
     }
   ]
 }

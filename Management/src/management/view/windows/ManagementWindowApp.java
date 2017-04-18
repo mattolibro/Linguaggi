@@ -37,7 +37,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ManagementWindowApp {
 
-	private List<Person> people; // people are also in this collection and not just in the JSON file
+	private List<Person> people; // people are also in this collection and not just in the JSON file. Filled everytime with entries in the JSONFile
 	File file;
 
 	private JFrame frame;
@@ -159,11 +159,13 @@ public class ManagementWindowApp {
 		);
 		frame.getContentPane().setLayout(groupLayout);
 
+		
 		listPeopleInitialization();
 	}
 
-	/* it initializes the collection of people and updates the textArea */
+	/* it initializes the collection of people (it fetches the data from the JSONfile) and updates the textArea */
 	private void listPeopleInitialization() {
+		/* Custom parser for the people grammar */
 		InputStream fis = null;
 		try {
 			fis = new FileInputStream(file);

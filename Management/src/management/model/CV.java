@@ -63,8 +63,11 @@ public class CV {
 			s += study.toString();
 		}
 		s += "Languages Known: ";
-		for (String language : languagesKnown) {
-			s += language+", ";
+		for (int i = 0; i < languagesKnown.size(); i++) {
+			if(i == languagesKnown.size()-1)
+				s += languagesKnown.get(i);
+			else
+				s += languagesKnown.get(i)+", ";
 		}
 		s +="\n";
 		for (Job job : jobs) {

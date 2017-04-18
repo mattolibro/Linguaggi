@@ -52,7 +52,7 @@ public abstract class Duty {
 		if(endDate != null)
 			s += "Date of end: "+endDate.getDayOfMonth()+"/"+endDate.getMonthValue()+"/"+endDate.getYear()+"\n";
 		else
-			s += "Date of end: -";
+			s += "Date of end: -\n";
 		
 		return s;
 	}

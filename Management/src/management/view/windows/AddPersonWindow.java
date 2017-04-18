@@ -14,10 +14,10 @@ import management.model.Job;
 import management.model.Person;
 import management.model.Study;
 import management.speech.SpeechInput;
-import management.view.mouseAdapters.JobMouseAdapter;
-import management.view.mouseAdapters.LanguageMouseAdapter;
-import management.view.mouseAdapters.PersonMouseAdapter;
-import management.view.mouseAdapters.StudyMouseAdapter;
+import management.view.actionListeners.JobListener;
+import management.view.actionListeners.LanguageListener;
+import management.view.actionListeners.PersonListener;
+import management.view.actionListeners.StudyListener;
 
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.SwingWorker;
+
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -51,9 +52,9 @@ public class AddPersonWindow extends JFrame {
 	private JLabel cvLabel;
 	private JButton doneButton;
 	
-	private StudyMouseAdapter studyMouseAdapter;
-	private LanguageMouseAdapter languageMouseAdapter;
-	private JobMouseAdapter jobMouseAdapter;
+	private StudyListener studyListener;
+	private LanguageListener languageListener;
+	private JobListener jobListener;
 	
 	private ManagementWindowApp mwa;
 	private JFrame frame;
@@ -63,6 +64,10 @@ public class AddPersonWindow extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 */
+	/**
+	 * @param frame
+	 * @param mwa
 	 */
 	public AddPersonWindow(JFrame frame, ManagementWindowApp mwa) {
 		
@@ -103,9 +108,8 @@ public class AddPersonWindow extends JFrame {
 			panel.add(lblId, BorderLayout.NORTH);
 
 			doneButton = new JButton("DONE");
-	
-			PersonMouseAdapter personMouseAdapter = new PersonMouseAdapter(this);
-			doneButton.addMouseListener(personMouseAdapter);
+			PersonListener personListener = new PersonListener(this);
+			doneButton.addActionListener(personListener);
 			panel.add(doneButton, BorderLayout.SOUTH);
 			
 			panel_1 = new JPanel();
@@ -122,7 +126,6 @@ public class AddPersonWindow extends JFrame {
 			speechRecognitionButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("Label was clicked!"); // debug -- to remove!
 					SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
 					    @Override
 					    protected String doInBackground() throws Exception {
@@ -139,8 +142,6 @@ public class AddPersonWindow extends JFrame {
 			// Icon for using the speech recognition
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 			speechRecognitionButton.setIcon(imageIcon);
-			
-			
 			
 			
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -168,36 +169,36 @@ public class AddPersonWindow extends JFrame {
 			);
 			panel_1.setLayout(gl_panel_1);
 			
-			
+			this.getRootPane().setDefaultButton(doneButton);
 		}
 		
 	}
-	
-	public void setRecording_label(String text) {
-		recording_label.setText(text);
+
+	public void addAnotherJob() {
+		doneButton.removeActionListener(jobListener);
+		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Job");
+		continueToInsertDialog.setVisible(true);
 	}
 	
-	public void setTextLabel(String text) {
-		lblId.setText(text);
+	public void addAnotherStudy() {
+		doneButton.removeActionListener(studyListener);
+		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Study");
+		continueToInsertDialog.setVisible(true);
 	}
 	
-	public void setTextField(String text) {
-		textField.setText(text);
+	public void addAnotherLanguage() {
+		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Language");
+		continueToInsertDialog.setVisible(true);
 	}
 	
-	public void removeLanguageMouseAdapter() {
-		doneButton.removeMouseListener(languageMouseAdapter);
-	}
-	
-	public void addLanguageMouseAdapter(LanguageMouseAdapter languageMouseAdapter) {
-		this.languageMouseAdapter = languageMouseAdapter;
-		doneButton.addMouseListener(this.languageMouseAdapter);
+	public void addLanguageListener(LanguageListener languageListener) {
+		this.languageListener = languageListener;
+		doneButton.addActionListener(this.languageListener);
 	}
 	
 	/*
 	 * it changes the panel for each field
 	 */
-	
 	public void changePanel() {
 		
 		switch(lblId.getText()) {
@@ -222,8 +223,6 @@ public class AddPersonWindow extends JFrame {
 			break;
 			
 		case "Date of Birth":
-			if(textField.getText().equals(""))
-				System.out.println("yeah");
 			person.setDateOfBirth((textField.getText()));
 			textField.setText("");
 			textField.setToolTipText(null);
@@ -275,8 +274,8 @@ public class AddPersonWindow extends JFrame {
 			textField.setToolTipText("yyyy-mm-dd");
 			lblId.setText("[Study] Date of End");
 			
-			studyMouseAdapter = new StudyMouseAdapter(this); // mouseAdapter created for knowing if adding another study
-			doneButton.addMouseListener(studyMouseAdapter);
+			studyListener = new StudyListener(this); // mouseAdapter created for knowing if adding another study
+			doneButton.addActionListener(studyListener);
 			break;
 		
 		case "[Study] Date of End":
@@ -312,8 +311,8 @@ public class AddPersonWindow extends JFrame {
 			textField.setToolTipText("yyyy-mm-dd");
 			lblId.setText("[Job] Date of End");
 			
-			jobMouseAdapter = new JobMouseAdapter(this);	// mouseAdapter created for knowing if adding another job
-			doneButton.addMouseListener(jobMouseAdapter);
+			jobListener = new JobListener(this);	// mouseAdapter created for knowing if adding another job
+			doneButton.addActionListener(jobListener);
 			break;
 		
 		case "[Job] Date of End":
@@ -328,21 +327,8 @@ public class AddPersonWindow extends JFrame {
 		}
 	}
 	
-	public void addAnotherStudy() {
-		doneButton.removeMouseListener(studyMouseAdapter);
-		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Study");
-		continueToInsertDialog.setVisible(true);
-	}
-	
-	public void addAnotherLanguage() {
-		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Language");
-		continueToInsertDialog.setVisible(true);
-	}
-	
-	public void addAnotherJob() {
-		doneButton.removeMouseListener(jobMouseAdapter);
-		ContinueToInsertDialog continueToInsertDialog = new ContinueToInsertDialog(this, "Job");
-		continueToInsertDialog.setVisible(true);
+	public void removeLanguageListener() {
+		doneButton.removeActionListener(languageListener);
 	}
 	
 	public void savePerson() {
@@ -351,4 +337,18 @@ public class AddPersonWindow extends JFrame {
 		frame.setEnabled(true);
 		this.dispose();
 	}
+	
+	public void setRecording_label(String text) {
+		recording_label.setText(text);
+	}
+	
+	public void setTextLabel(String text) {
+		lblId.setText(text);
+	}
+	
+	public void setTextField(String text) {
+		textField.setText(text);
+	}
+	
+	
 }
