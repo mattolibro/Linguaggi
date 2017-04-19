@@ -37,8 +37,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ManagementWindowApp {
 
-	private List<Person> people; // people are also in this collection and not just in the JSON file. Filled everytime with entries in the JSONFile
-	File file;
+	private static List<Person> people; // people are also in this collection and not just in the JSON file. Filled everytime with entries in the JSONFile
+	private File file;
 
 	private JFrame frame;
 	private ManagementWindowApp mwa = this;
@@ -228,6 +228,10 @@ public class ManagementWindowApp {
 		};
 		myWorker.execute();
 
+	}
+	
+	public static List<Person> getPeople() {
+		return people;
 	}
 
 	private void updateJSONFile(Person person) {

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import management.speech.SpeechInput;
+import management.view.actionListeners.SearchListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -51,6 +52,10 @@ public class SearchWindow extends SpeechTemplateSpeech {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
+		btnOk = new JButton("OK");
+		SearchListener searchListener = new SearchListener(this);
+		btnOk.addActionListener(searchListener);
+		
 		speechRecognitionButton = new JButton("");
 		speechRecognitionButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -76,7 +81,7 @@ public class SearchWindow extends SpeechTemplateSpeech {
 		Font fontRecordingLabel  = new Font(recording_label.getFont().getName(), Font.ITALIC, recording_label.getFont().getSize());
 		recording_label.setFont(fontRecordingLabel);
 		
-		btnOk = new JButton("OK");
+	
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -117,9 +122,18 @@ public class SearchWindow extends SpeechTemplateSpeech {
 							.addContainerGap())))
 		);
 		contentPane.setLayout(gl_contentPane);
+		
+		this.getRootPane().setDefaultButton(btnOk);
 	}
 
-
+	public String getText() {
+		return textField.getText();
+	}
+	
+	public void refreshTextField() {
+		textField.setText("");
+	}
+	
 	@Override
 	public void setRecording_label(String text) {
 		recording_label.setText(text);

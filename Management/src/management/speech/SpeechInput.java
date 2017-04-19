@@ -33,8 +33,8 @@ public class SpeechInput extends Thread{
 		frame.setRecording_label("Recording..."); // update the label on the addPerson frame (recording started)
 		try {
 			System.out.println("Recording...");
-			if(frame instanceof SearchWindow)
-				Thread.sleep(2000);
+			if(frame instanceof SearchWindow) 
+				Thread.sleep(2000); // add 2 more seconds for dictating the question
 			Thread.sleep(3000);
 			microphone.close();
 		} catch (InterruptedException ex) {
