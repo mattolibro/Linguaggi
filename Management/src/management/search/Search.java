@@ -1,24 +1,21 @@
 package management.search;
 
-import java.util.List;
+import java.util.StringTokenizer;
 
-import management.model.Person;
 import management.view.windows.PeopleFoundWindow;
 
 public class Search {
-
-	private List<Person> people;
 	
-	public Search(List<Person> people) {
-		this.people = people;
-	}
-
-
-	public void search(String query) {
-		System.out.println(query+"--> ora cerco la risposta confrontando la mappa con le possibili domande. dammi un attimo");
+	public static void search(String request) {
+		System.out.println("Request: "+ request +" --> ora cerco la risposta confrontando la mappa con le possibili domande. dammi un attimo");
+		
+		StringTokenizer st = new StringTokenizer(request);
+		while(st.hasMoreTokens()) {
+			System.out.println(st.nextToken());
+		}
 		
 		/*-------Answer in a frame-----------------*/
-		PeopleFoundWindow peopleFoundWindow = new PeopleFoundWindow(query);
+		PeopleFoundWindow peopleFoundWindow = new PeopleFoundWindow(request);
 		peopleFoundWindow.setVisible(true);
 	}
 }

@@ -127,6 +127,48 @@
           ]
         }
       }
+    },
+    {
+      "Person": {
+        "ID": "004",
+        "FirstName": "Dirk",
+        "LastName": "Nowitzki",
+        "DateOfBirth": "1978-09-18",
+        "Address": {
+          "Street": "via garibaldi, 1000",
+          "City": "Milano",
+          "PostalCode": "20121",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Biomedical Engineering",
+                "At": "Politecnico Milano",
+                "StartDate": "2003-01-01",
+                "EndDate": "2006-09-08"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English",
+            "Dutch",
+            "French"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Biomedical Engineer",
+                "At": "Bologna Hospital",
+                "StartDate": "2008-06-10",
+                "EndDate": "2015-05-16"
+              }
+            }
+          ]
+        }
+      }
     }
   ]
 }

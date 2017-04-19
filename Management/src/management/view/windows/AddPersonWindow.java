@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import management.core.Data;
 import management.model.Address;
 import management.model.CV;
 import management.model.Job;
@@ -56,7 +57,6 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 	private LanguageListener languageListener;
 	private JobListener jobListener;
 	
-	private ManagementWindowApp mwa;
 	private JFrame frame;
 	private JPanel panel_1;
 	private JTextField textField;
@@ -69,9 +69,8 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 	 * @param frame
 	 * @param mwa
 	 */
-	public AddPersonWindow(JFrame frame, ManagementWindowApp mwa) {
+	public AddPersonWindow(JFrame frame) {
 		
-		this.mwa = mwa;
 		this.frame = frame;
 		
 		frame.setEnabled(false);
@@ -334,7 +333,7 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 	
 	public void savePerson() {
 		person.setCv(cv); // here sets the curriculum vitae of person before saving person
-		mwa.addPerson(person);
+		Data.addPerson(person);
 		frame.setEnabled(true);
 		this.dispose();
 	}
