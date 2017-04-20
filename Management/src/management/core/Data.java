@@ -32,12 +32,20 @@ public class Data {
 
 	private static HashMap<String, TreeSet<String>> studies; // Key: NameStudy, Value: Person's ID
 	private static HashMap<String, TreeSet<String>> jobs;	 // Key: NameJob, Value: Person's ID
+	
+	/**-- Map with all the maps, it stores as key the keyword(String) and as value the map --**/
+	private static HashMap<String, HashMap<String, TreeSet<String>>> mapSearches; 
 
 	public static void initialize() {
 		/** Maps initialization **/
 		people = new HashMap<String, Person>();
 		studies = new HashMap<String, TreeSet<String>>();
 		jobs = new HashMap<String, TreeSet<String>>();
+		
+		mapSearches = new HashMap<String, HashMap<String, TreeSet<String>>>();
+		mapSearches.put("study", studies);
+		mapSearches.put("job", jobs);
+		
 
 		file = new File("files/grammarSample.json");
 
@@ -55,7 +63,7 @@ public class Data {
 				Person person = peopleJSonFactory.createPerson(); // it gives the actual person parsed from the JSONFile
 				people.put(person.getID(), person); // it fills the map with ID and Person
 				
-				/*In this part all the maps are filled */
+				/*In this part all the maps are filled. It's useful for the searching mode */
 
 				for (Study study : person.getCv().getStudies()) { // It iterates all the studies of the person 
 					if(studies.containsKey(study.getNameStudy())) {
@@ -99,6 +107,10 @@ public class Data {
 
 	public static HashMap<String, Person> getPeople() {
 		return people;
+	}
+	
+	public static HashMap<String, HashMap<String, TreeSet<String>>> getMapSearches() {
+		return mapSearches;
 	}
 
 	public static File getFile() {
