@@ -1,7 +1,7 @@
 package management.view.windows;
 
 import java.awt.BorderLayout;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,7 +23,7 @@ public class PeopleFoundWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PeopleFoundWindow(String title, TreeSet<Person> peopleFound) {
+	public PeopleFoundWindow(String title, HashSet<Person> peopleFound) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setTitle(title);

@@ -1,6 +1,7 @@
 package management.search;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
@@ -10,22 +11,25 @@ import management.model.Person;
 public class SearchForField {
 	
 	
-	public static TreeSet<Person> response(String typeField, StringTokenizer values) {
-		System.out.println("Searching studies");
-		TreeSet<Person> peopleFound = new TreeSet<Person>();
-		HashMap<String, TreeSet<String>> studies = Data.getMapSearches().get(typeField);
-		for (String field : studies.keySet()) {
-			StringTokenizer st = values;
-			while(st.hasMoreTokens()) {
-				String token = st.nextToken();
-				System.out.println(field+" con "+token);
-				if(field.toUpperCase().contains(token.toUpperCase())) {
-					System.out.println("trovato una corrispondenza studio");
-					peopleFound.add(Data.getPeople().get(studies.get(field)));
+	public static HashSet<Person> response(String typeField, String values, boolean time) {
+		HashSet<Person> peopleFound = new HashSet<Person>();
+		HashMap<String, TreeSet<String>> map = Data.getMapSearches().get(typeField); // it gets the map for the right field (es. study)
+		System.out.println("Ricerca per "+typeField);
+		for (String field : map.keySet()) {
+			StringTokenizer stringTokenizerValues = new StringTokenizer(values);
+			while(stringTokenizerValues.hasMoreTokens()) {
+				String tokenValue = stringTokenizerValues.nextToken();
+				StringTokenizer stringTokenizerField = new StringTokenizer(field);
+				while(stringTokenizerField.hasMoreTokens()) {
+					if(stringTokenizerField.nextToken().equalsIgnoreCase(tokenValue)) {
+						for(String id : map.get(field)) {
+							peopleFound.add(Data.getPeople().get(id));
+						}				
+					}
 				}
 			}
 		}
-		
+	
 		return peopleFound;
 	}
 	
