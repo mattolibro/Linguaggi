@@ -1,4 +1,4 @@
-package management.core;
+package management.data;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -66,22 +66,24 @@ public class Data {
 				/*In this part all the maps are filled. It's useful for the searching mode */
 
 				for (Study study : person.getCv().getStudies()) { // It iterates all the studies of the person 
-					if(studies.containsKey(study.getNameStudy())) {
-						studies.get(study.getNameStudy()).add(person.getID());
+					String studyField = study.getNameStudy().toLowerCase();
+					if(studies.containsKey(studyField)) {
+						studies.get(studyField).add(person.getID());
 					}
 					else {
-						studies.put(study.getNameStudy(), new TreeSet<String>());
-						studies.get(study.getNameStudy()).add(person.getID());
+						studies.put(studyField, new TreeSet<String>());
+						studies.get(studyField).add(person.getID());
 					}
 				}
 
 				for (Job job : person.getCv().getJobs()) { // It iterates all the jobs of the person 
-					if(jobs.containsKey(job.getNameJob())) {
-						jobs.get(job.getNameJob()).add(person.getID());
+					String jobField = job.getNameJob().toLowerCase();
+					if(jobs.containsKey(jobField)) {
+						jobs.get(jobField).add(person.getID());
 					}
 					else {
-						jobs.put(job.getNameJob(), new TreeSet<String>());
-						jobs.get(job.getNameJob()).add(person.getID());
+						jobs.put(jobField, new TreeSet<String>());
+						jobs.get(jobField).add(person.getID());
 					}
 				}
 			}

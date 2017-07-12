@@ -9,8 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import management.core.Data;
-
 import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import javax.swing.JLabel;
@@ -18,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import management.data.Data;
 
 
 public class ManagementWindowApp {

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import management.core.Data;
+import management.data.Data;
 import management.model.Address;
 import management.model.CV;
 import management.model.Job;

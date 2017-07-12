@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingWorker;
 
-import management.search.SearchDispatcher;
+import management.search.NewSearchDispatcher;
 import management.view.windows.SearchWindow;
 
 public class SearchListener implements ActionListener {
@@ -21,7 +21,7 @@ public class SearchListener implements ActionListener {
 		SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
 		    @Override
 		    protected String doInBackground() throws Exception {
-		    	SearchDispatcher.search(searchWindow.getText());
+		    	NewSearchDispatcher.search(searchWindow.getText());
 				searchWindow.refreshTextField();
 		        return null;
 		    }

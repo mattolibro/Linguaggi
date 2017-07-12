@@ -1,6 +1,7 @@
 package management.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 
 public abstract class Duty {
@@ -46,6 +47,10 @@ public abstract class Duty {
 			this.endDate = LocalDate.parse(endDate);
 		else
 			this.endDate = null;
+	}
+	
+	public int calculateYearsOfDuty() {
+		return (int) ChronoUnit.YEARS.between(this.startDate, this.endDate);
 	}
 	
 	@Override
