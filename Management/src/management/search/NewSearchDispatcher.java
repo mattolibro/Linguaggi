@@ -10,9 +10,9 @@ import management.view.windows.PeopleFoundWindow;
 
 public class NewSearchDispatcher {
 
-	private final static String STUDY_STRPATTERN = "(study|studies|studied)\\s+(.+)?"; //(study|studies|studied)\\s+(\\S+)(?:\\s+(\\S+))?
-	private final static String JOB_STRPATTERN = "(work|works|worked)\\s+(as)\\s+(.+)?";
-	private final static String JOBTIME_STRPATTERN = "(work|works|worked)\\s+(as)\\s+(.+)\\s(for)\\s(\\d+)\\s(year|years)?";
+	private final static String STUDY_STRPATTERN = "(study|studies|studied)\\s+(.+)"; //(study|studies|studied)\\s+(\\S+)(?:\\s+(\\S+))?
+	private final static String JOB_STRPATTERN = "(work|works|worked)\\s+(as)\\s+(.+)";
+	private final static String JOBTIME_STRPATTERN = "(work|works|worked)\\s+(as)\\s+(.+)\\s(for|for at least)\\s(\\d+)\\s(years|year)?";
 	//private final static String AGE_STRPATTERN = "";
 	//private final static String LANGUAGE_STRPATTERN = "";
 	private final static Pattern STUDY_PATTERN = Pattern.compile(STUDY_STRPATTERN);
@@ -34,8 +34,19 @@ public class NewSearchDispatcher {
 			while(matcherStudy.find()) {
 				String field = matcherStudy.group(2);
 				System.out.println("Searching for studies, field's value: "+field);
-				peopleFound = SearchForField.response("study", field, false);
+				peopleFound = SearchForField.response("study", field, 0);
 			}
+		}
+		else if(matcherJobTime.find()) {
+			System.out.println("Search about job field and time");
+			matcherJobTime = JOBTIME_PATTERN.matcher(request);
+			while(matcherJobTime.find()) {
+				String field = matcherJobTime.group(3);
+				int time = Integer.parseInt(matcherJobTime.group(5));
+				System.out.println("Searching for jobs, field's value: "+field);
+				peopleFound = SearchForField.response("job", field, time);
+			}
+			
 		}
 		else if (matcherJob.find()) {
 			System.out.println("Search about job field");
@@ -43,11 +54,8 @@ public class NewSearchDispatcher {
 			while(matcherJob.find()) {
 				String field = matcherJob.group(3);
 				System.out.println("Searching for jobs, field's value: "+field);
-				peopleFound = SearchForField.response("job", field, false);
+				peopleFound = SearchForField.response("job", field, 0);
 			}
-		}
-		else if(matcherJobTime.find()) {
-
 		}
 
 

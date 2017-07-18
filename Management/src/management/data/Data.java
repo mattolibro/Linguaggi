@@ -65,27 +65,7 @@ public class Data {
 				
 				/*In this part all the maps are filled. It's useful for the searching mode */
 
-				for (Study study : person.getCv().getStudies()) { // It iterates all the studies of the person 
-					String studyField = study.getNameStudy().toLowerCase();
-					if(studies.containsKey(studyField)) {
-						studies.get(studyField).add(person.getID());
-					}
-					else {
-						studies.put(studyField, new TreeSet<String>());
-						studies.get(studyField).add(person.getID());
-					}
-				}
-
-				for (Job job : person.getCv().getJobs()) { // It iterates all the jobs of the person 
-					String jobField = job.getNameJob().toLowerCase();
-					if(jobs.containsKey(jobField)) {
-						jobs.get(jobField).add(person.getID());
-					}
-					else {
-						jobs.put(jobField, new TreeSet<String>());
-						jobs.get(jobField).add(person.getID());
-					}
-				}
+				updateMaps(person);
 			}
 		}
 		catch (IOException e) {
@@ -101,8 +81,10 @@ public class Data {
 		}
 	}
 
+	
 	public static void addPerson(Person person) {
 		people.put(person.getID(), person);
+		updateMaps(person);
 		updateJSONFile(person); // updates the JSONFile
 		ManagementWindowApp.textFieldUpdate(person.toString());
 	}
@@ -150,6 +132,30 @@ public class Data {
 					in.close(); 
 
 				} catch (IOException ignore) {}
+		}
+	}
+	
+	private static void updateMaps(Person person) {
+		for (Study study : person.getCv().getStudies()) { // It iterates all the studies of the person 
+			String studyField = study.getNameStudy().toLowerCase();
+			if(studies.containsKey(studyField)) {
+				studies.get(studyField).add(person.getID());
+			}
+			else {
+				studies.put(studyField, new TreeSet<String>());
+				studies.get(studyField).add(person.getID());
+			}
+		}
+
+		for (Job job : person.getCv().getJobs()) { // It iterates all the jobs of the person 
+			String jobField = job.getNameJob().toLowerCase();
+			if(jobs.containsKey(jobField)) {
+				jobs.get(jobField).add(person.getID());
+			}
+			else {
+				jobs.put(jobField, new TreeSet<String>());
+				jobs.get(jobField).add(person.getID());
+			}
 		}
 	}
 

@@ -1,5 +1,6 @@
 package management.model;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Person {
 	
@@ -119,5 +120,20 @@ public class Person {
 				address.equals(p.address))
 			result = true;
 		return result;
+	}
+	
+	public Job getJob(String jobName) {
+		Job job = null;
+		for(Job j: this.getCv().getJobs()) {
+			if(j.getNameJob().equalsIgnoreCase(jobName)){
+				job = j;
+				break;
+			}
+		}
+		return job;
+	}
+	
+	public int getAge() {
+		return (int) ChronoUnit.YEARS.between(this.dateOfBirth, LocalDate.now());
 	}
 }

@@ -50,7 +50,10 @@ public abstract class Duty {
 	}
 	
 	public int calculateYearsOfDuty() {
-		return (int) ChronoUnit.YEARS.between(this.startDate, this.endDate);
+		if(this.endDate != null)
+			return (int) ChronoUnit.YEARS.between(this.startDate, this.endDate);
+		else
+			return (int) ChronoUnit.YEARS.between(this.startDate, LocalDate.now());
 	}
 	
 	@Override
