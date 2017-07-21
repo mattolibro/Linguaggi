@@ -145,5 +145,20 @@ public class CV {
 
 		return result;
 	}
+	
+	public int getNumLanguages() {
+		return languagesKnown.size();
+	}
+	
+	public boolean knowsEnglish() {
+		boolean known = false;
+		for (String language : languagesKnown) {
+			if(language.equalsIgnoreCase("english")){
+				known = true;
+				break;
+			}
+		}
+		return known;
+	}
 
 }

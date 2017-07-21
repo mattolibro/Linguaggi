@@ -11,7 +11,7 @@ import management.model.Person;
 public class SearchForField {
 
 
-	public static HashSet<Person> response(String typeField, String field, int time) {
+	public static HashSet<Person> response(String typeField, String field, int time) { //typeField = (job | study)
 		HashSet<Person> peopleFound = new HashSet<Person>();
 		HashMap<String, TreeSet<String>> map = Data.getMapSearches().get(typeField); // it gets the map for the right field (es. study)
 		TreeSet<String> peopleID = map.get(field);

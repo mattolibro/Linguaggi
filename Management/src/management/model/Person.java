@@ -57,7 +57,7 @@ public class Person {
 	}
 	
 	public void setDateOfBirth(String dateOfBirth) {
-		if(!dateOfBirth.equals("")) // usefull for debugging
+		if(!dateOfBirth.equals("")) // useful for debugging
 			this.dateOfBirth = LocalDate.parse(dateOfBirth);
 		else
 			this.dateOfBirth = null;
