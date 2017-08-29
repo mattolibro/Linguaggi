@@ -21,7 +21,7 @@ import javax.swing.SwingWorker;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
-public class SearchWindow extends SpeechTemplateSpeech {
+public class SearchWindow extends SpeechTemplateFrame {
 
 	/**
 	 * 
@@ -142,5 +142,17 @@ public class SearchWindow extends SpeechTemplateSpeech {
 	@Override
 	public void setTextField(String text) {
 		textField.setText(text);
+	}
+
+	@Override
+	public boolean englishSelected() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean italianSelected() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -13,12 +13,15 @@ public class NewSearchDispatcher {
 	private final static String STUDY_STRPATTERN = "(study|studies|studied)\\s+(.+)"; //(study|studies|studied)\\s+(\\S+)(?:\\s+(\\S+))?
 	private final static String JOB_STRPATTERN = "(work|works|worked)\\s+(?:as)\\s+(.+)";
 	private final static String JOBTIME_STRPATTERN = "(work|works|worked)\\s+(?:as)\\s+(.+)\\s+(for|for at least)\\s+(\\d+)(\\s+years|year)?";
-	private final static String AGE_STRPATTERN = "(is|are)\\s+((\\d+)|(less|younger|more|older)\\s+than\\s+(\\d+)|(between)\\s+(\\d+)\\s+and\\s+(\\d+))";
+	private final static String JOBTIME_STRPATTERN_2 = "(?:worked)\\s+(?:as)\\s+(.+)\\s+(recently|few years ago|at most (\\d+) (?:years|year) ago)";
+	private final static String AGE_STRPATTERN = "(?:(is|are)\\s+)?((\\d+)|(less|younger|more|older)\\s+than\\s+(\\d+)|(between)\\s+(\\d+)\\s+and\\s+(\\d+))";
 	private final static String LANGUAGE_STRPATTERN = "(?:knows|know|understands|understand|speaks|speak)\\s+(?:more than|at least|at least more than)\\s+(\\d+)\\s+(?:languages|language)(?:\\s+and (1|one) is (english|English))?";
+	
 	
 	private final static Pattern STUDY_PATTERN = Pattern.compile(STUDY_STRPATTERN);
 	private final static Pattern JOB_PATTERN = Pattern.compile(JOB_STRPATTERN);
 	private final static Pattern JOBTIME_PATTERN = Pattern.compile(JOBTIME_STRPATTERN);
+	private final static Pattern JOBTIME_PATTERN_2 = Pattern.compile(JOBTIME_STRPATTERN_2);
 	private final static Pattern AGE_PATTERN = Pattern.compile(AGE_STRPATTERN);
 	private final static Pattern LANGUAGE_PATTERN = Pattern.compile(LANGUAGE_STRPATTERN);
 
@@ -28,6 +31,7 @@ public class NewSearchDispatcher {
 		Matcher matcherStudy = STUDY_PATTERN.matcher(request);
 		Matcher matcherJob = JOB_PATTERN.matcher(request);
 		Matcher matcherJobTime = JOBTIME_PATTERN.matcher(request);
+		Matcher matcherJobTime_2 = JOBTIME_PATTERN_2.matcher(request);
 		Matcher matcherAge = AGE_PATTERN.matcher(request);
 		Matcher matcherLanguage = LANGUAGE_PATTERN.matcher(request);
 
@@ -39,19 +43,32 @@ public class NewSearchDispatcher {
 			while(matcherStudy.find()) {
 				String field = matcherStudy.group(2);
 				System.out.println("Searching for studies, field's value: "+field);
-				peopleFound = SearchForField.response("study", field, 0);
+				peopleFound = SearchForField.response("study", field, 0, false);
 			}
 		}
 		else if(matcherJobTime.find()) {
-			System.out.println("Search about job field and time");
+			System.out.println("Search about job field and time(how long)");
 			matcherJobTime = JOBTIME_PATTERN.matcher(request);
 			while(matcherJobTime.find()) {
 				String field = matcherJobTime.group(2);
 				int time = Integer.parseInt(matcherJobTime.group(4));
 				System.out.println("Searching for jobs, field's value: "+field);
-				peopleFound = SearchForField.response("job", field, time);
+				peopleFound = SearchForField.response("job", field, time, false);
 			}
 			
+		}
+		else if(matcherJobTime_2.find()) {
+			System.out.println("Search about job field and time(recently)");
+			matcherJobTime_2 = JOBTIME_PATTERN_2.matcher(request);
+			while(matcherJobTime_2.find()) {
+				String field = matcherJobTime_2.group(1);
+				int time = 0;
+				if(matcherJobTime_2.group(3) != null) {
+					time = Integer.parseInt(matcherJobTime_2.group(3));
+				}
+				System.out.println("Searching for jobs, field's value: "+field);
+				peopleFound = SearchForField.response("job", field, time, true);
+			}
 		}
 		else if (matcherJob.find()) {
 			System.out.println("Search about job field");
@@ -59,7 +76,7 @@ public class NewSearchDispatcher {
 			while(matcherJob.find()) {
 				String field = matcherJob.group(2);
 				System.out.println("Searching for jobs, field's value: "+field);
-				peopleFound = SearchForField.response("job", field, 0);
+				peopleFound = SearchForField.response("job", field, 0, false);
 			}
 		}
 		else if(matcherAge.find()) {

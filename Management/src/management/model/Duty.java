@@ -56,6 +56,13 @@ public abstract class Duty {
 			return (int) ChronoUnit.YEARS.between(this.startDate, LocalDate.now());
 	}
 	
+	public int calculateHowLongYearsOfDuty() {
+		if(this.endDate == null)
+			return 0;
+		else
+			return (int) ChronoUnit.YEARS.between(this.endDate, LocalDate.now());
+	}
+	
 	@Override
 	public String toString() {
 		String s = "";

@@ -6,15 +6,15 @@ import management.speech.recognizer.Recognizer;
 import management.speech.request.Languages;
 import management.speech.response.GoogleResponse;
 import management.view.windows.SearchWindow;
-import management.view.windows.SpeechTemplateSpeech;
+import management.view.windows.SpeechTemplateFrame;
 import management.speech.microphone.Microphone;
 import net.sourceforge.javaflacencoder.FLACFileWriter;
 
 public class SpeechInput extends Thread{
 
-	private SpeechTemplateSpeech frame;
+	private SpeechTemplateFrame frame;
 
-	public SpeechInput(SpeechTemplateSpeech frame) {
+	public SpeechInput(SpeechTemplateFrame frame) {
 		
 		this.frame = frame;
 	}
@@ -43,8 +43,13 @@ public class SpeechInput extends Thread{
 		microphone.close();
 		frame.setRecording_label(""); // update the label on the addPerson frame (recording stopped)
 		System.out.println("Recording stopped.");
+		
+		/* to extend in the future if it needs to add more languages*/
+		Languages language = Languages.ENGLISH_US;
+		if(frame.italianSelected())
+			language = Languages.ITALIAN;
 
-		Recognizer recognizer = new Recognizer(Languages.ITALIAN, System.getProperty("GOOGLE_API_KEY"));
+		Recognizer recognizer = new Recognizer(language, System.getProperty("GOOGLE_API_KEY"));
 
 		try {
 			int maxNumOfResponses = 1;

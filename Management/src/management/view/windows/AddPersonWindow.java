@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.SwingWorker;
@@ -31,8 +32,10 @@ import javax.swing.SwingWorker;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JRadioButton;
 
-public class AddPersonWindow extends SpeechTemplateSpeech {
+public class AddPersonWindow extends SpeechTemplateFrame {
 
 	/**
 	 * 
@@ -61,6 +64,8 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 	private JPanel panel_1;
 	private JTextField textField;
 	private JLabel recording_label;
+	private JRadioButton itRadioButton;
+	private JRadioButton enRadioButton;
 	
 	/**
 	 * Create the frame.
@@ -86,7 +91,7 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 
 		setTitle("Add Person");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 330, 145);
+		setBounds(100, 100, 373, 155);
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -141,30 +146,56 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 			// Icon for using the speech recognition
 			ImageIcon imageIcon = new ImageIcon(new ImageIcon("img/mic.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
 			speechRecognitionButton.setIcon(imageIcon);
+				
+			itRadioButton = new JRadioButton("IT");
+			itRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
+			
+			enRadioButton = new JRadioButton("EN");
+			enRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 8));
+			enRadioButton.setSelected(true);
+			
+			ButtonGroup groupRadioButtonLanguage = new ButtonGroup();
+			groupRadioButtonLanguage.add(itRadioButton);
+			groupRadioButtonLanguage.add(enRadioButton);
 			
 			
 			GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 			gl_panel_1.setHorizontalGroup(
 				gl_panel_1.createParallelGroup(Alignment.TRAILING)
 					.addGroup(gl_panel_1.createSequentialGroup()
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 261, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-							.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-								.addGap(18)
-								.addComponent(speechRecognitionButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
 							.addGroup(gl_panel_1.createSequentialGroup()
-								.addContainerGap(304, Short.MAX_VALUE)
-								.addComponent(recording_label)))
-						.addContainerGap())
+								.addComponent(speechRecognitionButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panel_1.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(itRadioButton, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+										.addGap(76))
+									.addGroup(gl_panel_1.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(enRadioButton, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+										.addContainerGap())))
+							.addGroup(gl_panel_1.createSequentialGroup()
+								.addComponent(recording_label)
+								.addContainerGap())))
 			);
 			gl_panel_1.setVerticalGroup(
 				gl_panel_1.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel_1.createSequentialGroup()
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-							.addComponent(speechRecognitionButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-						.addGap(1)
-						.addComponent(recording_label))
+						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+						.addGap(15))
+					.addGroup(gl_panel_1.createSequentialGroup()
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(speechRecognitionButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel_1.createSequentialGroup()
+								.addComponent(itRadioButton, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(enRadioButton, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(recording_label)
+						.addGap(8))
 			);
 			panel_1.setLayout(gl_panel_1);
 			
@@ -327,6 +358,14 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 		}
 	}
 	
+	public boolean englishSelected() {
+		return enRadioButton.isSelected();
+	}
+	
+	public boolean italianSelected() {
+		return itRadioButton.isSelected();
+	}
+	
 	public void removeLanguageListener() {
 		doneButton.removeActionListener(languageListener);
 	}
@@ -349,6 +388,4 @@ public class AddPersonWindow extends SpeechTemplateSpeech {
 	public void setTextField(String text) {
 		textField.setText(text);
 	}
-	
-	
 }
