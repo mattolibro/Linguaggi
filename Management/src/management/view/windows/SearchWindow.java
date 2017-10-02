@@ -1,5 +1,6 @@
 package management.view.windows;
 
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -33,6 +34,7 @@ public class SearchWindow extends SpeechTemplateFrame {
 	private JButton btnOk;
 	private JButton speechRecognitionButton;
 	private JLabel recording_label;
+	private JLabel questionsSuggested;
 
 
 	/**
@@ -81,6 +83,23 @@ public class SearchWindow extends SpeechTemplateFrame {
 		Font fontRecordingLabel  = new Font(recording_label.getFont().getName(), Font.ITALIC, recording_label.getFont().getSize());
 		recording_label.setFont(fontRecordingLabel);
 		
+		questionsSuggested = new JLabel("(Suggested questions)");
+		questionsSuggested.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		questionsSuggested.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SwingWorker<String, Void> myWorker= new SwingWorker<String, Void>() {
+				    @Override
+				    protected String doInBackground() throws Exception {
+						QuestionsSuggestedWindow questionsSuggestedWindow = new QuestionsSuggestedWindow();
+						questionsSuggestedWindow.setVisible(true);
+				        return null;
+				    }
+				};
+				myWorker.execute();
+				
+			}
+		});
 	
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -91,7 +110,10 @@ public class SearchWindow extends SpeechTemplateFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(label)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(label)
+									.addGap(154)
+									.addComponent(questionsSuggested))
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 									.addComponent(recording_label)
 									.addGroup(gl_contentPane.createSequentialGroup()
@@ -107,7 +129,9 @@ public class SearchWindow extends SpeechTemplateFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(label)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label)
+						.addComponent(questionsSuggested))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(speechRecognitionButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

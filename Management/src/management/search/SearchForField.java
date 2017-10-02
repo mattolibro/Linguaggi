@@ -14,7 +14,7 @@ public class SearchForField {
 	public static HashSet<Person> response(String typeField, String field, int time, boolean recently) { //typeField = (job | study)
 		HashSet<Person> peopleFound = new HashSet<Person>();
 		HashMap<String, TreeSet<String>> map = Data.getMapSearches().get(typeField); // it gets the map for the right field (es. study)
-		TreeSet<String> peopleID = map.get(field);
+		TreeSet<String> peopleID = map.get(field.toLowerCase());
 		System.out.println("Ricerca per "+typeField+" e tempo="+time+" recently: "+recently);
 
 		if(peopleID != null)

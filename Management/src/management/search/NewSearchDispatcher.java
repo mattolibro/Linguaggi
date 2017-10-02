@@ -14,7 +14,7 @@ public class NewSearchDispatcher {
 	private final static String JOB_STRPATTERN = "(work|works|worked)\\s+(?:as)\\s+(.+)";
 	private final static String JOBTIME_STRPATTERN = "(work|works|worked)\\s+(?:as)\\s+(.+)\\s+(for|for at least)\\s+(\\d+)(\\s+years|year)?";
 	private final static String JOBTIME_STRPATTERN_2 = "(?:worked)\\s+(?:as)\\s+(.+)\\s+(recently|few years ago|at most (\\d+) (?:years|year) ago)";
-	private final static String AGE_STRPATTERN = "(?:(is|are)\\s+)?((\\d+)|(less|younger|more|older)\\s+than\\s+(\\d+)|(between)\\s+(\\d+)\\s+and\\s+(\\d+))";
+	private final static String AGE_STRPATTERN = "(?:(is|are)\\s+)((\\d+)|(less|younger|more|older)\\s+than\\s+(\\d+)|(between)\\s+(\\d+)\\s+and\\s+(\\d+))";
 	private final static String LANGUAGE_STRPATTERN = "(?:knows|know|understands|understand|speaks|speak)\\s+(?:more than|at least|at least more than)\\s+(\\d+)\\s+(?:languages|language)(?:\\s+and (1|one) is (english|English))?";
 	
 	
@@ -36,7 +36,6 @@ public class NewSearchDispatcher {
 		Matcher matcherLanguage = LANGUAGE_PATTERN.matcher(request);
 
 		HashSet<Person> peopleFound = new HashSet<Person>();
-
 		if (matcherStudy.find()) {
 			System.out.println("Search about study field");
 			matcherStudy = STUDY_PATTERN.matcher(request);
@@ -79,6 +78,18 @@ public class NewSearchDispatcher {
 				peopleFound = SearchForField.response("job", field, 0, false);
 			}
 		}
+		else if(matcherLanguage.find()) {
+			System.out.println("Search about language");
+			matcherLanguage = LANGUAGE_PATTERN.matcher(request);
+			while(matcherLanguage.find()) {
+				int numLanguages = Integer.parseInt(matcherLanguage.group(1));
+				boolean english = false;
+				if(matcherLanguage.group(2) != null)
+					english = true;
+				System.out.println("Searching for more than "+numLanguages+" and english: "+english);
+				peopleFound = SearchForLanguage.response(numLanguages, english);
+			}
+		}
 		else if(matcherAge.find()) {
 			System.out.println("Search about age");
 			matcherAge = AGE_PATTERN.matcher(request);
@@ -98,18 +109,6 @@ public class NewSearchDispatcher {
 					peopleFound = SearchForAge.response(age1, age2);
 					
 				}
-			}
-		}
-		else if(matcherLanguage.find()) {
-			System.out.println("Search about language");
-			matcherLanguage = LANGUAGE_PATTERN.matcher(request);
-			while(matcherLanguage.find()) {
-				int numLanguages = Integer.parseInt(matcherLanguage.group(1));
-				boolean english = false;
-				if(matcherLanguage.group(2) != null)
-					english = true;
-				System.out.println("Searching for more than "+numLanguages+" and english: "+english);
-				peopleFound = SearchForLanguage.response(numLanguages, english);
 			}
 		}
 

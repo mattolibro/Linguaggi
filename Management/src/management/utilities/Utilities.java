@@ -4,9 +4,12 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Utilities {
-	
+
 	public static int countLines(String filename) throws IOException {
 		InputStream is = new BufferedInputStream(new FileInputStream(filename));
 		try {
@@ -26,5 +29,11 @@ public class Utilities {
 		} finally {
 			is.close();
 		}
+	}
+
+	public static String readQuestionsSuggested() throws IOException 
+	{
+		byte[] encoded = Files.readAllBytes(Paths.get("files/questionsSuggested.txt"));
+		return new String(encoded, Charset.defaultCharset());
 	}
 }

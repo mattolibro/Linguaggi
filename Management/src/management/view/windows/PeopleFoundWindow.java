@@ -37,6 +37,7 @@ public class PeopleFoundWindow extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
 
 		/*-----Inserting people found in the textarea-----*/
