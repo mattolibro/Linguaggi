@@ -1,0 +1,6 @@
+People who studied Computer Science
+People who work as Programmer
+People who work as Lawyer for at least 2 years
+Person who worked as Programmer at most 2 years ago
+Person who is between 25 and 40
+Person who speaks at least more than 3 languages and one is English
