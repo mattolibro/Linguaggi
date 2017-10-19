@@ -70,6 +70,7 @@ public class ManagementWindowApp {
 					public void windowClosing(WindowEvent e) {
 						frame.setEnabled(true);
 						e.getWindow().dispose();
+						frame.setVisible(true);
 					}
 				});
 			}
@@ -105,6 +106,7 @@ public class ManagementWindowApp {
 							public void windowClosing(WindowEvent e) {
 								frame.setEnabled(true);
 								e.getWindow().dispose();
+								frame.setVisible(true);
 							}
 						});
 						searchWindow.setVisible(true);

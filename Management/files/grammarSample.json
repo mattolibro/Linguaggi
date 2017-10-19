@@ -7,7 +7,7 @@
         "LastName": "Baudo",
         "DateOfBirth": "1989-07-31",
         "Address": {
-          "Street": "via della vittoria, 21",
+          "Street": "via della vittoria 21",
           "City": "Bologna",
           "PostalCode": "40100",
           "Country": "Monopoli"
@@ -18,7 +18,7 @@
               "Study": {
                 "NameStudy": "Computer Science",
                 "At": "Universita Bologna",
-                "StartDate": "2011-09-11",
+                "StartDate": "2008-09-11",
                 "EndDate": "2014-06-18"
               }
             },
@@ -55,7 +55,7 @@
         "LastName": "Power",
         "DateOfBirth": "1989-07-31",
         "Address": {
-          "Street": "via del bosco, 31",
+          "Street": "via del bosco 31",
           "City": "Bologna",
           "PostalCode": "40100",
           "Country": "Italy"
@@ -105,7 +105,7 @@
             {
             "Study": {
                 "NameStudy": "Law",
-                "At": "Bocconi - Milano",
+                "At": "Bocconi, Milano",
                 "StartDate": "2008-10-07",
                 "EndDate": "2014-07-09"
               }
@@ -121,7 +121,7 @@
                 "NameJob": "Lawyer",
                 "At": "Studio Bologna",
                 "StartDate": "2015-01-01",
-                "EndDate": "2017-01-01"
+                "EndDate": "2016-01-01"
               }
             }
           ]
@@ -135,7 +135,7 @@
         "LastName": "Nowitzki",
         "DateOfBirth": "1978-09-18",
         "Address": {
-          "Street": "via garibaldi, 1000",
+          "Street": "via Garibaldi 1000",
           "City": "Milano",
           "PostalCode": "20121",
           "Country": "Italy"
@@ -177,7 +177,7 @@
         "LastName": "Stimare",
         "DateOfBirth": "1990-09-12",
         "Address": {
-          "Street": "Ballack street, 90",
+          "Street": "Ballack street 90",
           "City": "Dusseldorf",
           "PostalCode": "40477",
           "Country": "Germany"
@@ -204,6 +204,333 @@
                 "At": "Dusseldorf Hospital",
                 "StartDate": "2017-01-01",
                 "EndDate": "2017-03-10"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "006",
+        "FirstName": "Paolo",
+        "LastName": "Paolini",
+        "DateOfBirth": "1959-04-01",
+        "Address": {
+          "Street": "viale Verdi 10",
+          "City": "Firenze",
+          "PostalCode": "50100",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Law",
+                "At": "Università  di Bologna",
+                "StartDate": "1984-09-10",
+                "EndDate": "1990-12-20"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English",
+            "French"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Lawyer",
+                "At": "Studio Meneghini",
+                "StartDate": "1992-01-19",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "007",
+        "FirstName": "Daniela",
+        "LastName": "Pirelli",
+        "DateOfBirth": "1961-07-29",
+        "Address": {
+          "Street": "via Pertini 13",
+          "City": "Gorizia",
+          "PostalCode": "90210",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Computer engineering",
+                "At": "Politecnico di Milano",
+                "StartDate": "1987-09-22",
+                "EndDate": "1992-10-24"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Programmer",
+                "At": "IMA",
+                "StartDate": "1993-02-10",
+                "EndDate": "2001-02-01"
+              }
+            },
+            {
+              "Job": {
+                "NameJob": "Manager",
+                "At": "IMA",
+                "StartDate": "2001-02-02",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "008",
+        "FirstName": "Ilaria",
+        "LastName": "Brizzi",
+        "DateOfBirth": "1984-06-12",
+        "Address": {
+          "Street": "via Emilia 365",
+          "City": "",
+          "PostalCode": "40068",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Chemistry",
+                "At": "Università di Bologna",
+                "StartDate": "2003-10-10",
+                "EndDate": "2009-03-14"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "French"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Chemical",
+                "At": "Fatro",
+                "StartDate": "2009-06-18",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "009",
+        "FirstName": "Irene",
+        "LastName": "Nordman",
+        "DateOfBirth": "1993-11-23",
+        "Address": {
+          "Street": "via Cosmo 16",
+          "City": "Torino",
+          "PostalCode": "10121",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Computer Science",
+                "At": "Politecnico di Torino",
+                "StartDate": "2014-09-21",
+                "EndDate": "2017-07-20"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Programmer",
+                "At": "Fiat",
+                "StartDate": "2017-09-10",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "010",
+        "FirstName": "Matilda",
+        "LastName": "Marzioni",
+        "DateOfBirth": "1989-12-21",
+        "Address": {
+          "Street": "via del Marmo 13",
+          "City": "Bari",
+          "PostalCode": "70121",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Computer Science",
+                "At": "La Sapienza Roma",
+                "StartDate": "2008-09-10",
+                "EndDate": "2017-03-02"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Programmer",
+                "At": "IMA",
+                "StartDate": "2017-05-06",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "011",
+        "FirstName": "Giovanni",
+        "LastName": "Muro",
+        "DateOfBirth": "1991-08-31",
+        "Address": {
+          "Street": "via Edera 2",
+          "City": "San Lazzaro di Savena",
+          "PostalCode": "40068",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Computer Science",
+                "At": "Università di Bologna",
+                "StartDate": "2011-09-20",
+                "EndDate": "2017-03-04"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Programmer",
+                "At": "GD",
+                "StartDate": "2017-10-10",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "012",
+        "FirstName": "Francesco",
+        "LastName": "Marabini",
+        "DateOfBirth": "1975-10-19",
+        "Address": {
+          "Street": "via dell'Indipendenza 21",
+          "City": "Bologna",
+          "PostalCode": "40100",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Economics",
+                "At": "Università di Bologna",
+                "StartDate": "1989-09-11",
+                "EndDate": "1996-10-20"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian",
+            "English",
+            "German"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Manager",
+                "At": "Malboro",
+                "StartDate": "2000-01-01",
+                "EndDate": ""
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "Person": {
+        "ID": "013",
+        "FirstName": "Eugenio",
+        "LastName": "Scannavini",
+        "DateOfBirth": "1989-09-27",
+        "Address": {
+          "Street": "via Genova 14",
+          "City": "Bologna",
+          "PostalCode": "40100",
+          "Country": "Italy"
+        },
+        "CV": {
+          "Studies": [
+            {
+            "Study": {
+                "NameStudy": "Law",
+                "At": "Università di Bologna",
+                "StartDate": "2008-09-10",
+                "EndDate": "2015-06-18"
+              }
+            }
+          ],
+          "LanguagesKnown": [
+            "Italian"
+          ],
+          "Jobs": [
+            {
+              "Job": {
+                "NameJob": "Lawyer",
+                "At": "Studio Meneghini",
+                "StartDate": "2017-10-01",
+                "EndDate": ""
               }
             }
           ]

@@ -36,5 +36,6 @@ public class ContinueMouseAdapter extends MouseAdapter {
 		}
 		
 		addPersonWindow.setEnabled(true);
+		addPersonWindow.setVisible(true);
 	}
 }

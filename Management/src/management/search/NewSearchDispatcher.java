@@ -107,7 +107,6 @@ public class NewSearchDispatcher {
 					int age1 = Integer.parseInt(matcherAge.group(7));
 					int age2 = Integer.parseInt(matcherAge.group(8));
 					peopleFound = SearchForAge.response(age1, age2);
-					
 				}
 			}
 		}

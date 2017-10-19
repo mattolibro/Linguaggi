@@ -30,11 +30,13 @@ public void mouseClicked(MouseEvent e) {
 		case "Study":
 			addPersonWindow.setTextLabel("Language"); // -> changePanel starts inserting a new language
 			addPersonWindow.addLanguageListener(languageListener);
+			addPersonWindow.setVisible(true);
 			break;
 			
 		case "Language":
 			addPersonWindow.removeLanguageListener();
 			addPersonWindow.setTextLabel("[Job] Name Job"); // -> changePanel starts inserting a new job
+			addPersonWindow.setVisible(true);
 			break;
 			
 		case "Job":

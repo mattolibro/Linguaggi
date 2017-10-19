@@ -26,6 +26,7 @@ public class Data {
 
 	private static File file;
 	private static HashMap<String, Person> people; // it's useful having a map for the people who are in the JSONFile, especially for the searching feature
+												   // Key: Person's ID, Value: Person
 
 	/**-- These maps are going to be used for the searching. Perhaps all this part needs to be moved somewhere else  --**
 	 **-- They are populated by the fields as keys and the IDs of the people as values --------------------------------**/
@@ -136,7 +137,7 @@ public class Data {
 	}
 	
 	private static void updateMaps(Person person) {
-		for (Study study : person.getCv().getStudies()) { // It iterates all the studies of the person 
+		for (Study study : person.getCv().getStudies()) { // It iterates all the studies of the person and adds it to the right spot in the map
 			String studyField = study.getNameStudy().toLowerCase();
 			if(studies.containsKey(studyField)) {
 				studies.get(studyField).add(person.getID());
